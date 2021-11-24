@@ -55,7 +55,7 @@ namespace Ecom
             //Service
             services.AddScoped<UserService>();
 
-            //Respository
+            //Repository
             services.AddScoped<UserRepository>();
 
             return services;
@@ -64,7 +64,7 @@ namespace Ecom
         private void Application_Startup(object sender, StartupEventArgs e)
         {
             var window = _serviceProvider.GetService<BaseWindow>();
-            window.Show();
+            window?.Show();
         }
     }
 }
