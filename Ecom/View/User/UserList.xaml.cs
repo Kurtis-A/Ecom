@@ -1,5 +1,8 @@
-﻿using System;
+﻿using Ecom.Services;
+using Ecom.ViewModel.User;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,9 +23,14 @@ namespace Ecom.View.User
     /// </summary>
     public partial class UserList : UserControl
     {
-        public UserList()
+        private readonly UserService _service;
+
+        public UserList(UserService service)
         {
             InitializeComponent();
+            _service = service;
         }
+
+        public ObservableCollection<UserListViewModel> Users { get; set; }
     }
 }
