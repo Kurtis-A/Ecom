@@ -63,7 +63,7 @@
 
                     </TabItem>
 
-                    <TabItem>
+                    <TabItem MouseEnter="TabItem_MouseEnter">
                         <TabItem.Header>
                             <StackPanel Height="Auto"
                                         Width="Auto">
@@ -79,7 +79,7 @@
 
                     </TabItem>
 
-                    <TabItem>
+                    <TabItem MouseEnter="TabItem_MouseEnter">
                         <TabItem.Header>
                             <StackPanel Height="Auto"
                                         Width="Auto">
@@ -93,7 +93,7 @@
                             </StackPanel>
                         </TabItem.Header>
 
-                        <ContentPresenter />
+                        <ContentPresenter Content="{Binding WindowPage}"/>
 
                     </TabItem>
                 </TabControl>
