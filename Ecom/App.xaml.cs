@@ -8,6 +8,7 @@ using ToastNotifications;
 using ToastNotifications.Position;
 using ToastNotifications.Lifetime;
 using System;
+using Ecom.View.User;
 
 namespace Ecom
 {
@@ -16,11 +17,9 @@ namespace Ecom
     /// </summary>
     public partial class App : Application
     {
-        private readonly ServiceProvider _serviceProvider;
-
         public App()
         {
-            _serviceProvider = ConfigureServices().BuildServiceProvider();
+            Globals.ServiceProvider = ConfigureServices().BuildServiceProvider();
             ConfigureNotifications();
         }
 
@@ -48,6 +47,7 @@ namespace Ecom
 
             //Views
             services.AddTransient<BaseWindow>();
+            services.AddTransient<UserList>();
 
             //View Model
             services.AddScoped<SingleUserViewModel>();
@@ -63,7 +63,7 @@ namespace Ecom
 
         private void Application_Startup(object sender, StartupEventArgs e)
         {
-            var window = _serviceProvider.GetService<BaseWindow>();
+            var window = Globals.ServiceProvider.GetService<BaseWindow>();
             window?.Show();
         }
     }
