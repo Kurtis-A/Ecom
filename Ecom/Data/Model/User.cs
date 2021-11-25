@@ -19,6 +19,20 @@ namespace Ecom.Data.Model
 
         public DateTime LeaveDate { get; set; }
 
+        public bool AvailMonday { get; set; }
+
+        public bool AvailTuesday { get; set; }
+
+        public bool AvailWednesday { get; set; }
+
+        public bool AvailThursday { get; set; }
+
+        public bool AvailFriday { get; set; }
+
+        public bool AvailSaturday { get; set; }
+
+        public bool AvailSunday{ get; set; }
+
         public DateTime CreatedDate { get; set; }
 
         public DateTime LastUpdated { get; set; }
@@ -42,6 +56,7 @@ namespace Ecom.Data.Model
         public string NextOfKinRelation { get; set; }
 
         public int NextOfKinContactNumber { get; set; }
+
         public DateTime? Archived { get; set; }
     }
 }
