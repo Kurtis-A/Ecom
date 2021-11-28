@@ -10,6 +10,7 @@ using ToastNotifications.Lifetime;
 using System;
 using Ecom.View.User;
 using AutoMapper;
+using Ecom.Data.Model;
 
 namespace Ecom
 {
@@ -47,7 +48,10 @@ namespace Ecom
         {
             var config = new MapperConfiguration(cfg =>
             {
-
+                cfg.CreateMap<StaffListViewModel, Staff>();
+                cfg.CreateMap<StaffViewModel, Staff>();
+                cfg.CreateMap<Staff, StaffListViewModel>();
+                cfg.CreateMap<Staff, StaffViewModel>();
             });
 
             Globals.Mapper = config.CreateMapper();
