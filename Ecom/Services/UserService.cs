@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Ecom.Data.Repository;
 using Ecom.ViewModel.User;
@@ -22,7 +19,7 @@ namespace Ecom.Services
 
         public async Task<List<UserListViewModel>> FetchAllUsers()
         {
-            
+            return null;
         }
     }
 }
