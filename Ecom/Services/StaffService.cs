@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using Ecom.Data.Model;
 using Ecom.Data.Repository;
+using Ecom.Helpers;
 using Ecom.ViewModel.User;
 
 namespace Ecom.Services
@@ -16,7 +18,8 @@ namespace Ecom.Services
 
         public async Task<List<StaffListViewModel>> FetchAllUsers()
         {
-            return null;
+            var results = await _userRepository.FindAll();
+            return Globals.Mapper.Map<List<Staff>, List<StaffListViewModel>>(results);
         }
     }
 }
