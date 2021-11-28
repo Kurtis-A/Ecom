@@ -3,7 +3,7 @@ using Ecom.Data.Model.Base;
 
 namespace Ecom.Data.Model
 {
-    public class User : ISoftDeleteEntity
+    public class Staff : ISoftDeleteEntity
     {
         public int Id { get; set; }
 
@@ -19,19 +19,7 @@ namespace Ecom.Data.Model
 
         public DateTime LeaveDate { get; set; }
 
-        public bool AvailMonday { get; set; }
-
-        public bool AvailTuesday { get; set; }
-
-        public bool AvailWednesday { get; set; }
-
-        public bool AvailThursday { get; set; }
-
-        public bool AvailFriday { get; set; }
-
-        public bool AvailSaturday { get; set; }
-
-        public bool AvailSunday{ get; set; }
+        public string Preference { get; set; }
 
         public DateTime CreatedDate { get; set; }
 

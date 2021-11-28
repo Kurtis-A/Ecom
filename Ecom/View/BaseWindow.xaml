@@ -4,8 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Ecom" 
-        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        xmlns:user="clr-namespace:Ecom.View.User"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
         mc:Ignorable="d"
         Title="Ecom" 
         Height="800"
@@ -16,17 +15,18 @@
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
         MouseDown="Window_MouseDown">
+    
     <Border CornerRadius="5"
-            Background="{DynamicResource PrimaryHueMidBrush}">
+            Background="{DynamicResource MaterialDesignPaper}">
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="auto"/>
+                <RowDefinition Height="60"/>
                 <RowDefinition />
             </Grid.RowDefinitions>
 
             <Grid Grid.Row="1">
                 <TabControl Style="{StaticResource MaterialDesignNavigatilRailTabControl}"
-                            materialDesign:ColorZoneAssist.Mode="PrimaryDark"
+                            materialDesign:ColorZoneAssist.Mode="Standard"
                             materialDesign:NavigationRailAssist.ShowSelectionBackground="True"
                             TabStripPlacement="Top"
                             Background="Transparent">
@@ -44,6 +44,8 @@
                             </StackPanel>
                         </TabItem.Header>
                         
+                        <ContentPresenter x:Name="HomeView"/>
+                        
                     </TabItem>
                     
                     
@@ -51,19 +53,21 @@
                         <TabItem.Header>
                             <StackPanel Height="Auto"
                                         Width="Auto">
-                                <materialDesign:PackIcon Kind="Sterling"
+                                <materialDesign:PackIcon Kind="Planner"
                                                             Width="24"
                                                             Height="24"
                                                             HorizontalAlignment="Center"/>
 
-                                <TextBlock Text="Bank"
+                                <TextBlock Text="Planner"
                                             HorizontalAlignment="Center"/>
                             </StackPanel>
                         </TabItem.Header>
 
+                        <ContentPresenter x:Name="PlannerView"/>
+                        
                     </TabItem>
 
-                    <TabItem MouseEnter="TabItem_MouseEnter">
+                    <TabItem>
                         <TabItem.Header>
                             <StackPanel Height="Auto"
                                         Width="Auto">
@@ -76,25 +80,27 @@
                                             HorizontalAlignment="Center"/>
                             </StackPanel>
                         </TabItem.Header>
-
+                        
+                        <ContentPresenter x:Name="ShiftView"/>
+                        
                     </TabItem>
 
-                    <TabItem MouseEnter="TabItem_MouseEnter">
+                    <TabItem>
                         <TabItem.Header>
                             <StackPanel Height="Auto"
                                         Width="Auto">
-                                <materialDesign:PackIcon Kind="Account"
+                                <materialDesign:PackIcon Kind="UserMultiple"
                                                             Width="24"
                                                             Height="24"
                                                             HorizontalAlignment="Center"/>
 
-                                <TextBlock Text="User"
+                                <TextBlock Text="Staff"
                                             HorizontalAlignment="Center"/>
                             </StackPanel>
                         </TabItem.Header>
 
-                        <ContentPresenter Content="{Binding WindowPage}"/>
-
+                        <ContentPresenter x:Name="StaffView"/>
+                        
                     </TabItem>
                 </TabControl>
             </Grid>
@@ -106,6 +112,10 @@
                     <ColumnDefinition />
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
+
+                <materialDesign:Card Grid.ColumnSpan="3"
+                                     Background="{DynamicResource PrimaryHueMidBrush}"
+                                     materialDesign:ShadowAssist.ShadowDepth="Depth2"/>
 
                 <Label Grid.Column="0"
                        Content="E C O M"

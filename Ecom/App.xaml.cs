@@ -8,8 +8,10 @@ using ToastNotifications;
 using ToastNotifications.Position;
 using ToastNotifications.Lifetime;
 using System;
-using Ecom.View.User;
 using AutoMapper;
+using Ecom.Data.Model;
+using Ecom.Data;
+using Ecom.View.Staff;
 
 namespace Ecom
 {
@@ -33,7 +35,7 @@ namespace Ecom
                     parentWindow: Current.MainWindow,
                     corner: Corner.TopRight,
                     offsetX: 10,
-                    offsetY: 55);
+                    offsetY: 65);
 
                 cfg.LifetimeSupervisor = new TimeAndCountBasedLifetimeSupervisor(
                     notificationLifetime: TimeSpan.FromSeconds(3),
@@ -47,7 +49,10 @@ namespace Ecom
         {
             var config = new MapperConfiguration(cfg =>
             {
-
+                cfg.CreateMap<StaffListViewModel, Staff>();
+                cfg.CreateMap<StaffViewModel, Staff>();
+                cfg.CreateMap<Staff, StaffListViewModel>();
+                cfg.CreateMap<Staff, StaffViewModel>();
             });
 
             Globals.Mapper = config.CreateMapper();
@@ -58,17 +63,20 @@ namespace Ecom
             var services = new ServiceCollection();
 
             //Views
-            services.AddTransient<BaseWindow>();
-            services.AddTransient<UserList>();
+            services.AddSingleton(typeof(BaseWindow));
+            services.AddSingleton(typeof(StaffView));
 
             //View Model
-            services.AddScoped<SingleUserViewModel>();
+            services.AddScoped<StaffViewModel>();
 
             //Service
-            services.AddScoped<UserService>();
+            services.AddScoped<StaffService>();
 
             //Repository
-            services.AddScoped<UserRepository>();
+            services.AddScoped<StaffRepository>();
+
+            //Db Context
+            services.AddDbContext<ApplicationDbContext>();
 
             return services;
         }

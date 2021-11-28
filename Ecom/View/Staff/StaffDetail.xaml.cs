@@ -1,8 +1,5 @@
-﻿using Ecom.Services;
-using Ecom.ViewModel.User;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,21 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Ecom.View.User
+namespace Ecom.View.Staff
 {
     /// <summary>
-    /// Interaction logic for UserList.xaml
+    /// Interaction logic for StaffDetail.xaml
     /// </summary>
-    public partial class UserList : UserControl
+    public partial class StaffDetail : UserControl
     {
-        private readonly UserService _service;
-
-        public UserList(UserService service)
+        public StaffDetail()
         {
             InitializeComponent();
-            _service = service;
         }
-
-        public ObservableCollection<UserListViewModel> Users { get; set; }
     }
 }

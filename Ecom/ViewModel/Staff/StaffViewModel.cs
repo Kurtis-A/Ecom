@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Markup;
-
-namespace Ecom.ViewModel.User
+﻿namespace Ecom.ViewModel.User
 {
-    public class SingleUserViewModel : ViewModelBase
+    public class StaffViewModel : ViewModelBase
     {
         private string _role;
         private string _username;

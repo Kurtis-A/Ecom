@@ -9,20 +9,20 @@
 
                 <ResourceDictionary>
                     <ResourceDictionary.MergedDictionaries>
-                        <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.BlueGrey.xaml" />
+                        <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.Blue.xaml" />
                     </ResourceDictionary.MergedDictionaries>
 
-                    <SolidColorBrush x:Key="PrimaryHueLightBrush" Color="{StaticResource Primary200}"/>
-                    <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="{StaticResource Primary500}"/>
-                    <SolidColorBrush x:Key="PrimaryHueDarkBrush" Color="{StaticResource Primary900}"/>
+                    <SolidColorBrush x:Key="PrimaryHueLightBrush" Color="#70a1ff"/>
+                    <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#3273d0"/>
+                    <SolidColorBrush x:Key="PrimaryHueDarkBrush" Color="#22499e"/>
                 </ResourceDictionary>
 
                 <ResourceDictionary>
                     <ResourceDictionary.MergedDictionaries>
-                        <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Blue.xaml" />
+                        <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Orange.xaml" />
                     </ResourceDictionary.MergedDictionaries>
 
-                    <SolidColorBrush x:Key="SecondaryHueMidBrush" Color="{StaticResource Accent400}"/>
+                    <SolidColorBrush x:Key="SecondaryHueMidBrush" Color="{StaticResource Accent200}"/>
                 </ResourceDictionary>
 
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Dark.xaml" />
