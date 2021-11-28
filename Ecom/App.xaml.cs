@@ -12,6 +12,9 @@ using AutoMapper;
 using Ecom.Data.Model;
 using Ecom.Data;
 using Ecom.View.Staff;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using System.IO;
 
 namespace Ecom
 {
@@ -20,8 +23,17 @@ namespace Ecom
     /// </summary>
     public partial class App : Application
     {
+        public IConfiguration Configuration { get; set; }
+
         public App()
         {
+            //Add Appsettings
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json", false, true);
+
+            Configuration = builder.Build();
+
             Globals.ServiceProvider = ConfigureServices().BuildServiceProvider();
             ConfigureNotifications();
             ConfigureMapper();
@@ -76,7 +88,11 @@ namespace Ecom
             services.AddScoped<StaffRepository>();
 
             //Db Context
-            services.AddDbContext<ApplicationDbContext>();
+            services.AddDbContext<ApplicationDbContext>(option =>
+            {
+                option.UseSqlServer(Configuration.GetConnectionString("Local"));
+            },ServiceLifetime.Transient);
+            
 
             return services;
         }

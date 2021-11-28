@@ -17,33 +17,33 @@ namespace Ecom.Data.Model
 
         public DateTime StartDate { get; set; }
 
-        public DateTime LeaveDate { get; set; }
+        public DateTime? LeaveDate { get; set; }
 
         public string Preference { get; set; }
 
-        public DateTime CreatedDate { get; set; }
+        public DateTime Created { get; set; }
 
-        public DateTime LastUpdated { get; set; }
+        public DateTime Updated { get; set; }
 
         public DateTime DateOfBirth { get; set; }
 
         public string AddressLine1 { get; set; }
 
-        public string AddressLine2 { get; set; }
+        public string? AddressLine2 { get; set; }
 
-        public string AddressLine3 { get; set; }
+        public string? AddressLine3 { get; set; }
 
         public string Postcode { get; set; }
 
         public int ContactNumber { get; set; }
 
-        public string ContactEmail { get; set; }
+        public string? ContactEmail { get; set; }
 
-        public string NextOfKinName { get; set; }
+        public string? NextOfKinName { get; set; }
 
-        public string NextOfKinRelation { get; set; }
+        public string? NextOfKinRelation { get; set; }
 
-        public int NextOfKinContactNumber { get; set; }
+        public int? NextOfKinContactNumber { get; set; }
 
         public DateTime? Archived { get; set; }
     }
