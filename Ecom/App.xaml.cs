@@ -8,9 +8,9 @@ using ToastNotifications;
 using ToastNotifications.Position;
 using ToastNotifications.Lifetime;
 using System;
-using Ecom.View.User;
 using AutoMapper;
 using Ecom.Data.Model;
+using Ecom.Data;
 
 namespace Ecom
 {
@@ -62,8 +62,7 @@ namespace Ecom
             var services = new ServiceCollection();
 
             //Views
-            services.AddTransient<BaseWindow>();
-            services.AddTransient<UserList>();
+            services.AddSingleton(typeof(BaseWindow));
 
             //View Model
             services.AddScoped<StaffViewModel>();
@@ -73,6 +72,9 @@ namespace Ecom
 
             //Repository
             services.AddScoped<StaffRepository>();
+
+            //Db Context
+            services.AddDbContext<ApplicationDbContext>();
 
             return services;
         }

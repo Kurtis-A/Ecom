@@ -4,8 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Ecom" 
-        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        xmlns:user="clr-namespace:Ecom.View.User"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
         mc:Ignorable="d"
         Title="Ecom" 
         Height="800"
@@ -43,7 +42,7 @@
                                             HorizontalAlignment="Center"/>
                             </StackPanel>
                         </TabItem.Header>
-                        
+                        <ContentPresenter x:Name="HomeView"/>
                     </TabItem>
                     
                     
@@ -63,7 +62,7 @@
 
                     </TabItem>
 
-                    <TabItem MouseEnter="TabItem_MouseEnter">
+                    <TabItem>
                         <TabItem.Header>
                             <StackPanel Height="Auto"
                                         Width="Auto">
@@ -79,7 +78,7 @@
 
                     </TabItem>
 
-                    <TabItem MouseEnter="TabItem_MouseEnter">
+                    <TabItem>
                         <TabItem.Header>
                             <StackPanel Height="Auto"
                                         Width="Auto">
@@ -92,9 +91,6 @@
                                             HorizontalAlignment="Center"/>
                             </StackPanel>
                         </TabItem.Header>
-
-                        <ContentPresenter Content="{Binding WindowPage}"/>
-
                     </TabItem>
                 </TabControl>
             </Grid>
