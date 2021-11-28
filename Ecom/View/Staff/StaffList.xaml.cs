@@ -23,14 +23,14 @@ namespace Ecom.View.User
     /// </summary>
     public partial class UserList : UserControl
     {
-        private readonly UserService _service;
+        private readonly StaffService _service;
 
-        public UserList(UserService service)
+        public UserList(StaffService service)
         {
             InitializeComponent();
             _service = service;
         }
 
-        public ObservableCollection<UserListViewModel> Users { get; set; }
+        public ObservableCollection<StaffListViewModel> Users { get; set; }
     }
 }

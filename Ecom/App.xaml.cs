@@ -62,13 +62,13 @@ namespace Ecom
             services.AddTransient<UserList>();
 
             //View Model
-            services.AddScoped<SingleUserViewModel>();
+            services.AddScoped<StaffViewModel>();
 
             //Service
-            services.AddScoped<UserService>();
+            services.AddScoped<StaffService>();
 
             //Repository
-            services.AddScoped<UserRepository>();
+            services.AddScoped<StaffRepository>();
 
             return services;
         }

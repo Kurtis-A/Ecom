@@ -6,18 +6,18 @@ using Microsoft.Extensions.Logging;
 
 namespace Ecom.Services
 {
-    public class UserService
+    public class StaffService
     {
-        private readonly ILogger<UserService> _logger;
-        private readonly UserRepository _userRepository;
+        private readonly ILogger<StaffService> _logger;
+        private readonly StaffRepository _userRepository;
 
-        public UserService(ILogger<UserService> logger, UserRepository userRepository)
+        public StaffService(ILogger<StaffService> logger, StaffRepository userRepository)
         {
             _logger = logger;
             _userRepository = userRepository;
         }
 
-        public async Task<List<UserListViewModel>> FetchAllUsers()
+        public async Task<List<StaffListViewModel>> FetchAllUsers()
         {
             return null;
         }

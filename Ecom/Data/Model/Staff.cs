@@ -3,7 +3,7 @@ using Ecom.Data.Model.Base;
 
 namespace Ecom.Data.Model
 {
-    public class User : ISoftDeleteEntity
+    public class Staff : ISoftDeleteEntity
     {
         public int Id { get; set; }
 

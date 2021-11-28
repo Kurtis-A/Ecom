@@ -1,10 +1,10 @@
 ﻿namespace Ecom.Data.Repository
 {
-    public class UserRepository
+    public class StaffRepository
     {
         private readonly ApplicationDbContext _context;
 
-        public UserRepository()
+        public StaffRepository()
         {
 
         }
