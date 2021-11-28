@@ -21,4 +21,9 @@
     <PackageReference Include="ToastNotifications.Messages" Version="2.5.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="View\Shift\" />
+    <Folder Include="View\Planner\" />
+  </ItemGroup>
+
 </Project>

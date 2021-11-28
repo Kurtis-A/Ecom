@@ -15,17 +15,18 @@
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
         MouseDown="Window_MouseDown">
+    
     <Border CornerRadius="5"
-            Background="{DynamicResource PrimaryHueMidBrush}">
+            Background="{DynamicResource MaterialDesignPaper}">
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="auto"/>
+                <RowDefinition Height="60"/>
                 <RowDefinition />
             </Grid.RowDefinitions>
 
             <Grid Grid.Row="1">
                 <TabControl Style="{StaticResource MaterialDesignNavigatilRailTabControl}"
-                            materialDesign:ColorZoneAssist.Mode="PrimaryDark"
+                            materialDesign:ColorZoneAssist.Mode="Standard"
                             materialDesign:NavigationRailAssist.ShowSelectionBackground="True"
                             TabStripPlacement="Top"
                             Background="Transparent">
@@ -42,7 +43,9 @@
                                             HorizontalAlignment="Center"/>
                             </StackPanel>
                         </TabItem.Header>
+                        
                         <ContentPresenter x:Name="HomeView"/>
+                        
                     </TabItem>
                     
                     
@@ -60,6 +63,8 @@
                             </StackPanel>
                         </TabItem.Header>
 
+                        <ContentPresenter x:Name="PlannerView"/>
+                        
                     </TabItem>
 
                     <TabItem>
@@ -75,7 +80,9 @@
                                             HorizontalAlignment="Center"/>
                             </StackPanel>
                         </TabItem.Header>
-
+                        
+                        <ContentPresenter x:Name="ShiftView"/>
+                        
                     </TabItem>
 
                     <TabItem>
@@ -91,6 +98,9 @@
                                             HorizontalAlignment="Center"/>
                             </StackPanel>
                         </TabItem.Header>
+
+                        <ContentPresenter x:Name="StaffView"/>
+                        
                     </TabItem>
                 </TabControl>
             </Grid>
@@ -102,6 +112,10 @@
                     <ColumnDefinition />
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
+
+                <materialDesign:Card Grid.ColumnSpan="3"
+                                     Background="{DynamicResource PrimaryHueMidBrush}"
+                                     materialDesign:ShadowAssist.ShadowDepth="Depth2"/>
 
                 <Label Grid.Column="0"
                        Content="E C O M"

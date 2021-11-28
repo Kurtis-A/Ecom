@@ -11,6 +11,7 @@ using System;
 using AutoMapper;
 using Ecom.Data.Model;
 using Ecom.Data;
+using Ecom.View.Staff;
 
 namespace Ecom
 {
@@ -34,7 +35,7 @@ namespace Ecom
                     parentWindow: Current.MainWindow,
                     corner: Corner.TopRight,
                     offsetX: 10,
-                    offsetY: 55);
+                    offsetY: 65);
 
                 cfg.LifetimeSupervisor = new TimeAndCountBasedLifetimeSupervisor(
                     notificationLifetime: TimeSpan.FromSeconds(3),
@@ -63,6 +64,7 @@ namespace Ecom
 
             //Views
             services.AddSingleton(typeof(BaseWindow));
+            services.AddSingleton(typeof(StaffView));
 
             //View Model
             services.AddScoped<StaffViewModel>();
