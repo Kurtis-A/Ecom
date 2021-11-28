@@ -68,6 +68,10 @@
             <Separator Margin="5 0"
                        Grid.Row="0"
                        VerticalAlignment="Bottom"/>
+
+            <ContentPresenter x:Name="StaffDetailVeiwer"
+                              Grid.Row="1"/>
+            
         </Grid>
     </Grid>
 </UserControl>
