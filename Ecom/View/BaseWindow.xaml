@@ -51,12 +51,12 @@
                         <TabItem.Header>
                             <StackPanel Height="Auto"
                                         Width="Auto">
-                                <materialDesign:PackIcon Kind="Sterling"
+                                <materialDesign:PackIcon Kind="Planner"
                                                             Width="24"
                                                             Height="24"
                                                             HorizontalAlignment="Center"/>
 
-                                <TextBlock Text="Bank"
+                                <TextBlock Text="Planner"
                                             HorizontalAlignment="Center"/>
                             </StackPanel>
                         </TabItem.Header>
@@ -83,12 +83,12 @@
                         <TabItem.Header>
                             <StackPanel Height="Auto"
                                         Width="Auto">
-                                <materialDesign:PackIcon Kind="Account"
+                                <materialDesign:PackIcon Kind="UserMultiple"
                                                             Width="24"
                                                             Height="24"
                                                             HorizontalAlignment="Center"/>
 
-                                <TextBlock Text="User"
+                                <TextBlock Text="Staff"
                                             HorizontalAlignment="Center"/>
                             </StackPanel>
                         </TabItem.Header>
