@@ -35,7 +35,7 @@ namespace Ecom.Data.Model
 
         public string Postcode { get; set; }
 
-        public int ContactNumber { get; set; }
+        public string ContactNumber { get; set; }
 
         public string? ContactEmail { get; set; }
 
@@ -43,7 +43,7 @@ namespace Ecom.Data.Model
 
         public string? NextOfKinRelation { get; set; }
 
-        public int? NextOfKinContactNumber { get; set; }
+        public string? NextOfKinContactNumber { get; set; }
 
         public DateTime? Archived { get; set; }
     }

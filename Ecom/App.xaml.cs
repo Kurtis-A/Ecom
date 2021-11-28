@@ -1,6 +1,6 @@
 ﻿using Ecom.Services;
 using Ecom.Data.Repository;
-using Ecom.ViewModel.User;
+using Ecom.ViewModel.Staff;
 using Microsoft.Extensions.DependencyInjection;
 using System.Windows;
 using Ecom.Helpers;
