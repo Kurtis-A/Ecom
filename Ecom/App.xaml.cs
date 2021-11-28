@@ -9,6 +9,7 @@ using ToastNotifications.Position;
 using ToastNotifications.Lifetime;
 using System;
 using Ecom.View.User;
+using AutoMapper;
 
 namespace Ecom
 {
@@ -21,6 +22,7 @@ namespace Ecom
         {
             Globals.ServiceProvider = ConfigureServices().BuildServiceProvider();
             ConfigureNotifications();
+            ConfigureMapper();
         }
 
         private void ConfigureNotifications()
@@ -39,6 +41,16 @@ namespace Ecom
 
                 cfg.Dispatcher = Current.Dispatcher;
             });
+        }
+
+        private void ConfigureMapper()
+        {
+            var config = new MapperConfiguration(cfg =>
+            {
+
+            });
+
+            Globals.Mapper = config.CreateMapper();
         }
 
         private ServiceCollection ConfigureServices()
