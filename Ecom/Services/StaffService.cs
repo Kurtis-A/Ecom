@@ -1,22 +1,25 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using Ecom.Data.Model;
 using Ecom.Data.Repository;
-using Ecom.ViewModel.User;
+using Ecom.Helpers;
+using Ecom.ViewModel.Staff;
 
 namespace Ecom.Services
 {
     public class StaffService
     {
-        private readonly StaffRepository _userRepository;
+        private readonly StaffRepository _staffRepository;
 
-        public StaffService(StaffRepository userRepository)
+        public StaffService(StaffRepository staffRepository)
         {
-            _userRepository = userRepository;
+            _staffRepository = staffRepository;
         }
 
         public async Task<List<StaffListViewModel>> FetchAllUsers()
         {
-            return null;
+            var results = await _staffRepository.FindAll();
+            return Globals.Mapper.Map<List<Staff>, List<StaffListViewModel>>(results);
         }
     }
 }

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Ecom.Data.Model;
+﻿using Ecom.Data.Model;
 using Microsoft.EntityFrameworkCore;
 
 namespace Ecom.Data
@@ -20,6 +15,10 @@ namespace Ecom.Data
 
         }
 
-        public DbSet<Staff> Users { get; set; }
+        public DbSet<Staff> Staff { get; set; }
+
+        public DbSet<Absence> Absence { get; set; }
+
+        public DbSet<Rota> Rota { get; set; }
     }
 }

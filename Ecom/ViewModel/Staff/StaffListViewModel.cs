@@ -1,4 +1,4 @@
-﻿namespace Ecom.ViewModel.User
+﻿namespace Ecom.ViewModel.Staff
 {
     public class StaffListViewModel : ViewModelBase
     {
