@@ -16,5 +16,9 @@ namespace Ecom.Data
         }
 
         public DbSet<Staff> Staff { get; set; }
+
+        public DbSet<Absence> Absence { get; set; }
+
+        public DbSet<Rota> Rota { get; set; }
     }
 }
