@@ -1,17 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using Ecom.Helpers;
+using Ecom.Services;
+using Ecom.ViewModel.Staff;
+using System;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using ToastNotifications.Messages;
 
 namespace Ecom.View.Staff
 {
@@ -20,9 +12,37 @@ namespace Ecom.View.Staff
     /// </summary>
     public partial class StaffDetail : UserControl
     {
-        public StaffDetail()
+        private readonly StaffService _service;
+
+        public StaffDetail(StaffService service)
         {
             InitializeComponent();
+
+            _service = service;
+        }
+
+        public StaffViewModel ViewModel;
+
+        public async void Load(StaffListViewModel viewModel)
+        {
+            try
+            {
+                ViewModel = await _service.FetchStaffById(viewModel.Id);
+                if (ViewModel == null)
+                {
+                    Globals.Notifier.ShowWarning("Staff Member Details not found");
+                }
+                else
+                {
+                    Globals.Notifier.ShowSuccess("Staff Member Details Loaded");
+                }
+
+                DataContext = ViewModel;
+            }
+            catch (Exception e)
+            {
+                Globals.Notifier.ShowError($"Error: {e.Message}");
+            }
         }
     }
 }

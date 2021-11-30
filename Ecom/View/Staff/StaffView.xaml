@@ -13,7 +13,8 @@
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
 
-        <Grid Grid.Column="0">
+        <Grid Grid.Column="0"
+              Margin="5">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
@@ -67,7 +68,8 @@
                       SelectionUnit="FullRow"/>
         </Grid>
 
-        <Grid Grid.Column="1">
+        <Grid Grid.Column="1"
+              Margin="5">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition />

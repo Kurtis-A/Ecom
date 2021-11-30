@@ -77,6 +77,7 @@ namespace Ecom
             //Views
             services.AddSingleton(typeof(BaseWindow));
             services.AddSingleton(typeof(StaffView));
+            services.AddSingleton(typeof(StaffDetail));
 
             //View Model
             services.AddScoped<StaffViewModel>();

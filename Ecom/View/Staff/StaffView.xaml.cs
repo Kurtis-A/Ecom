@@ -1,5 +1,7 @@
-﻿using Ecom.Services;
+﻿using Ecom.Helpers;
+using Ecom.Services;
 using Ecom.ViewModel.Staff;
+using Microsoft.Extensions.DependencyInjection;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -61,7 +63,7 @@ namespace Ecom.View.Staff
             buttonTemplate.VisualTree = panelFactory;
 
             FrameworkElementFactory buttonAFactory = new FrameworkElementFactory(typeof(Button));
-            buttonAFactory.AddHandler(ButtonBase.ClickEvent, new RoutedEventHandler((o,e) => TemplateClick((o as Button).DataContext as StaffListViewModel)));
+            buttonAFactory.AddHandler(ButtonBase.ClickEvent, new RoutedEventHandler((o,e) => LoadStaffDetails((o as Button).DataContext as StaffListViewModel)));
             buttonAFactory.SetValue(StyleProperty, Application.Current.FindResource("EcomDataGridViewButton") as Style);
             buttonAFactory.SetValue(ToolTipProperty, "View Staff Member");
             panelFactory.AppendChild(buttonAFactory);
@@ -71,9 +73,12 @@ namespace Ecom.View.Staff
             DataGrid_StaffList.Columns.Add(buttonColumn);
         }
 
-        private void TemplateClick(StaffListViewModel viewModel)
+        private void LoadStaffDetails(StaffListViewModel viewModel)
         {
-
+            StaffDetailVeiwer.Content = null;
+            var details = Globals.ServiceProvider.GetRequiredService<StaffDetail>();
+            details.Load(viewModel);
+            StaffDetailVeiwer.Content = details;
         }
 
         protected void OnPropertyChanged([CallerMemberName] string name = null)

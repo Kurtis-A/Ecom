@@ -6,8 +6,140 @@
              xmlns:local="clr-namespace:Ecom.View.Staff"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="400">
+             d:DesignHeight="440" d:DesignWidth="390">
     <Grid>
+        <Grid.Resources>
             
+            <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource MaterialDesignOutlinedTextBox}">
+                <Setter Property="Margin" Value="5"/>
+            </Style>
+            
+            <Style TargetType="{x:Type DatePicker}" BasedOn="{StaticResource MaterialDesignOutlinedDatePicker}">
+                <Setter Property="Margin" Value="5"/>
+            </Style>
+            
+            <Style TargetType="{x:Type Label}" BasedOn="{StaticResource MaterialDesignLabel}">
+                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="HorizontalAlignment" Value="Left"/>
+                <Setter Property="Margin" Value="10 5"/>
+                <Setter Property="FontSize" Value="14"/>
+                <Setter Property="Foreground" Value="{DynamicResource MaterialDesignBodyLight}"/>
+            </Style>
+
+            <Style TargetType="{x:Type CheckBox}" BasedOn="{StaticResource MaterialDesignActionAccentToggleButton}">
+                <Setter Property="Width" Value="32"/>
+                <Setter Property="Margin" Value="10 5"/>
+                <Style.Triggers>
+                    <Trigger Property="IsChecked" Value="True">
+                        <Setter Property="Background" Value="PaleGreen"/>
+                    </Trigger>
+                    <Trigger Property="IsChecked" Value="False">
+                        <Setter Property="Background" Value="PaleVioletRed"/>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+            
+        </Grid.Resources>
+        <ScrollViewer VerticalScrollBarVisibility="Auto"
+                      HorizontalScrollBarVisibility="Disabled">
+            <Grid Margin="0 0 5 0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="10"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                
+                <WrapPanel ItemWidth="190"
+                           Grid.Row="1">
+
+                    <TextBox Text="{Binding Id, NotifyOnSourceUpdated=True, Mode=TwoWay}"
+                         materialDesign:HintAssist.Hint="Staff Id"/>
+
+                    <TextBox Text="{Binding Username, NotifyOnSourceUpdated=True, Mode=TwoWay}"
+                         materialDesign:HintAssist.Hint="Username"/>
+
+                    <TextBox Text="{Binding Firstname, NotifyOnSourceUpdated=True, Mode=TwoWay}"
+                         materialDesign:HintAssist.Hint="First Name"/>
+
+                    <TextBox Text="{Binding Surname, NotifyOnSourceUpdated=True, Mode=TwoWay}"
+                         materialDesign:HintAssist.Hint="Surname"/>
+
+                    <DatePicker Text="{Binding StartDate, NotifyOnSourceUpdated=True, Mode=TwoWay}"
+                         materialDesign:HintAssist.Hint="Start Date"/>
+
+                    <DatePicker Text="{Binding LeaveDate, NotifyOnSourceUpdated=True, Mode=TwoWay}"
+                         materialDesign:HintAssist.Hint="Leave Date"/>
+                    
+                </WrapPanel>
+
+                <Grid Grid.Row="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="40"/>
+                        <ColumnDefinition Width="130"/>
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+
+                    <Separator Grid.Column="0" Margin="5 0 0 0"/>
+                    <Label Content="Staff Availability" Grid.Column="1"/>
+                    <Separator Grid.Column="2" Margin="0 0 5 0"/>
+                </Grid>
+
+                <WrapPanel ItemWidth="55"
+                           Grid.Row="3">
+
+                    <CheckBox Content="M"
+                              IsChecked="{Binding AvailMonday, NotifyOnSourceUpdated=True, Mode=TwoWay}"/>
+
+                    <CheckBox Content="T"
+                              IsChecked="{Binding AvailTuesday, NotifyOnSourceUpdated=True, Mode=TwoWay}"/>
+
+                    <CheckBox Content="W"
+                              IsChecked="{Binding AvailWednesday, NotifyOnSourceUpdated=True, Mode=TwoWay}"/>
+
+                    <CheckBox Content="T"
+                              IsChecked="{Binding AvailThrusday, NotifyOnSourceUpdated=True, Mode=TwoWay}"/>
+
+                    <CheckBox Content="F"
+                              IsChecked="{Binding AvailFriday, NotifyOnSourceUpdated=True, Mode=TwoWay}"/>
+
+                    <CheckBox Content="S"
+                              IsChecked="{Binding AvailSaturday, NotifyOnSourceUpdated=True, Mode=TwoWay}"/>
+
+                    <CheckBox Content="S"
+                              IsChecked="{Binding AvailSunday, NotifyOnSourceUpdated=True, Mode=TwoWay}"/>
+                </WrapPanel>
+
+                <Grid Grid.Row="4">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="40"/>
+                        <ColumnDefinition Width="130"/>
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+
+                    <Separator Grid.Column="0" Margin="5 0 0 0"/>
+                    <Label Content="Staff Address" Grid.Column="1"/>
+                    <Separator Grid.Column="2" Margin="0 0 5 0"/>
+                </Grid>
+
+                <StackPanel Grid.Row="5">
+                    
+                    <TextBox Text="{Binding AddressLine1, NotifyOnSourceUpdated=True, Mode=TwoWay}"
+                             materialDesign:HintAssist.Hint="House Name / Number (incl. Apartment Number)"/>
+
+                    <TextBox Text="{Binding AddressLine2, NotifyOnSourceUpdated=True, Mode=TwoWay}"
+                             materialDesign:HintAssist.Hint="Street Name"/>
+
+                    <TextBox Text="{Binding AddressLine3, NotifyOnSourceUpdated=True, Mode=TwoWay}"
+                             materialDesign:HintAssist.Hint="Town / City Name"/>
+
+                    <TextBox Text="{Binding Postcode, NotifyOnSourceUpdated=True, Mode=TwoWay}"
+                             materialDesign:HintAssist.Hint="Postcode"/>
+
+                </StackPanel>
+            </Grid>
+        </ScrollViewer>
     </Grid>
 </UserControl>

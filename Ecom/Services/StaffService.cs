@@ -21,5 +21,13 @@ namespace Ecom.Services
             var results = await _staffRepository.FindAll();
             return Globals.Mapper.Map<List<Staff>, List<StaffListViewModel>>(results);
         }
+
+        public async Task<StaffViewModel> FetchStaffById(int id)
+        {
+            var results = await _staffRepository.Find(id);
+            var viewModel = new StaffViewModel();
+
+            return results == null ? viewModel : Globals.Mapper.Map<StaffViewModel>(results);
+        }
     }
 }
