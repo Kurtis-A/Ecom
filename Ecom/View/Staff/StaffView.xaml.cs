@@ -62,6 +62,7 @@ namespace Ecom.View.Staff
 
             FrameworkElementFactory buttonAFactory = new FrameworkElementFactory(typeof(Button));
             buttonAFactory.AddHandler(ButtonBase.ClickEvent, new RoutedEventHandler((o,e) => TemplateClick((o as Button).DataContext as StaffListViewModel)));
+            buttonAFactory.SetValue(StyleProperty, Application.Current.FindResource("EcomDataGridViewButton") as Style);
             buttonAFactory.SetValue(ToolTipProperty, "View Staff Member");
             panelFactory.AppendChild(buttonAFactory);
 
