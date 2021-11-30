@@ -49,6 +49,7 @@
 
             <DataGrid Grid.Row="2"
                       ItemsSource="{Binding StaffMembers, NotifyOnSourceUpdated=True, NotifyOnTargetUpdated=True, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                      x:Name="DataGrid_StaffList"
                       Foreground="White"
                       Margin="5"
                       materialDesign:ShadowAssist.ShadowDepth="Depth2"
