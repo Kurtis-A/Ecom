@@ -36,6 +36,11 @@ namespace Ecom.ViewModel
             return errors.ContainsKey(propertyName) ? errors[propertyName] : null;
         }
 
+        public void ClearErrors()
+        {
+            errors = new Dictionary<string, List<string>>();
+        }
+
         protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));

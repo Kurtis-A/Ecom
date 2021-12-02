@@ -1,5 +1,9 @@
-﻿using System;
+﻿using Ecom.Helpers;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 
 namespace Ecom.ViewModel.Staff
 {
@@ -11,7 +15,6 @@ namespace Ecom.ViewModel.Staff
         private string surname;
         private DateTime startDate;
         private DateTime? leaveDate;
-        private string preference;
         private string addressLine1;
         private string addressLine2;
         private string addressLine3;
@@ -20,13 +23,14 @@ namespace Ecom.ViewModel.Staff
         public int Id { get; set; }
 
         [Required(ErrorMessage = "Please enter a Username")]
+        [StringLength(3)]
         public string Username
         {
             get => _username;
             set
             {
                 _username = value;
-                Validate(value, nameof(Username));
+                Validate(value);
             }
         }
 
@@ -34,14 +38,22 @@ namespace Ecom.ViewModel.Staff
         public string Firstname
         {
             get => firstName;
-            set => firstName = value;
+            set
+            {
+                firstName = value;
+                Validate(value);
+            }
         }
 
         [Required(ErrorMessage = "Please enter a Surname")]
         public string Surname
         {
             get => surname;
-            set => surname = value;
+            set
+            {
+                surname = value;
+                Validate(value);
+            }
         }
 
         [Required(ErrorMessage = "Please select a role")]
@@ -51,7 +63,7 @@ namespace Ecom.ViewModel.Staff
             set
             {
                 _role = value;
-                Validate(value, nameof(Role));
+                Validate(value);
             }
         }
 
@@ -62,6 +74,7 @@ namespace Ecom.ViewModel.Staff
             set
             {
                 startDate = value;
+                Validate(value);
             }
         }
 
@@ -74,31 +87,103 @@ namespace Ecom.ViewModel.Staff
             }
         }
 
-        public string Preference
-        {
-            get => preference;
-            set
-            {
-                preference = value;
-            }
-        }
+        public string Preference { get; set; }
 
         public bool AvailMonday
         {
-            get => preference.Contains("Monday");
+            get => GetPreference(Globals.DaysOfWeek.Monday.ToString());
             set
             {
-                if (!preference.Contains("Monday"))
-                {
-                    if (string.IsNullOrEmpty(preference))
-                    {
-                        preference = "Monday";
-                    }
-                    else
-                    {
-                        preference += ",Monday";
-                    }
-                }
+                if (value)
+                    AddPreference(Globals.DaysOfWeek.Monday.ToString());
+                else
+                    RemovePreference(Globals.DaysOfWeek.Monday.ToString());
+
+                OnPropertyChanged();
+            }
+        }
+
+        public bool AvailTuesday
+        {
+            get => GetPreference(Globals.DaysOfWeek.Tuesday.ToString());
+            set
+            {
+                if (value)
+                    AddPreference(Globals.DaysOfWeek.Tuesday.ToString());
+                else
+                    RemovePreference(Globals.DaysOfWeek.Tuesday.ToString());
+
+                OnPropertyChanged();
+            }
+        }
+
+        public bool AvailWednesday
+        {
+            get => GetPreference(Globals.DaysOfWeek.Wednesday.ToString());
+            set
+            {
+                if (value)
+                    AddPreference(Globals.DaysOfWeek.Wednesday.ToString());
+                else
+                    RemovePreference(Globals.DaysOfWeek.Wednesday.ToString());
+
+                OnPropertyChanged();
+            }
+        }
+
+        public bool AvailThursday
+        {
+            get => GetPreference(Globals.DaysOfWeek.Thursday.ToString());
+            set
+            {
+                if (value)
+                    AddPreference(Globals.DaysOfWeek.Thursday.ToString());
+                else
+                    RemovePreference(Globals.DaysOfWeek.Thursday.ToString());
+
+                OnPropertyChanged();
+            }
+        }
+
+        public bool AvailFriday
+        {
+            get => GetPreference(Globals.DaysOfWeek.Friday.ToString());
+            set
+            {
+                if (value)
+                    AddPreference(Globals.DaysOfWeek.Friday.ToString());
+                else
+                    RemovePreference(Globals.DaysOfWeek.Friday.ToString());
+
+                OnPropertyChanged();
+            }
+        }
+
+        public bool AvailSaturday
+        {
+            get => GetPreference(Globals.DaysOfWeek.Saturday.ToString());
+            set
+            {
+                if (value)
+                    AddPreference(Globals.DaysOfWeek.Saturday.ToString());
+                else
+                    RemovePreference(Globals.DaysOfWeek.Saturday.ToString());
+
+                OnPropertyChanged();
+            }
+        }
+
+        public bool AvailSunday
+        {
+            get => GetPreference(Globals.DaysOfWeek.Sunday.ToString());
+            set
+            {
+                if (value)
+                    AddPreference(Globals.DaysOfWeek.Sunday.ToString());
+                else
+                    RemovePreference(Globals.DaysOfWeek.Sunday.ToString());
+
+                OnPropertyChanged();
             }
         }
 
@@ -136,6 +221,21 @@ namespace Ecom.ViewModel.Staff
             {
                 postcode = value;
             }
+        }
+
+        private bool GetPreference(string key)
+        {
+            return Preference.Contains(key);
+        }
+
+        private void RemovePreference(string key)
+        {
+            Preference = Preference.Replace($"{key},", string.Empty);
+        }
+
+        private void AddPreference(string key)
+        {
+            Preference += $"{key},";
         }
     }
 }
