@@ -27,9 +27,9 @@
                         FontSize="18"
                         Foreground="{DynamicResource PrimaryHueMidBrush}"/>
 
-            <Separator Margin="5 0"
+            <!--<Separator Margin="5 0"
                        Grid.Row="0"
-                       VerticalAlignment="Bottom"/>
+                       VerticalAlignment="Bottom"/>-->
 
             <StackPanel Orientation="Horizontal"
                         Grid.Row="1"
@@ -65,7 +65,9 @@
                       CanUserResizeRows="False"
                       IsReadOnly="True"
                       SelectionMode="Single"
-                      SelectionUnit="FullRow"/>
+                      SelectionUnit="FullRow"
+                      VerticalContentAlignment="Center"
+                      HorizontalContentAlignment="Center"/>
         </Grid>
 
         <Grid Grid.Column="1"
@@ -81,9 +83,9 @@
                         FontSize="18"
                         Foreground="{DynamicResource PrimaryHueMidBrush}"/>
 
-            <Separator Margin="5 0"
+            <!--<Separator Margin="5 0"
                        Grid.Row="0"
-                       VerticalAlignment="Bottom"/>
+                       VerticalAlignment="Bottom"/>-->
 
             <ContentPresenter x:Name="StaffDetailVeiwer"
                               Grid.Row="1"/>

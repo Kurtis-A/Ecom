@@ -3,9 +3,7 @@ using Ecom.Services;
 using Ecom.ViewModel.Staff;
 using Microsoft.Extensions.DependencyInjection;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
@@ -37,7 +35,7 @@ namespace Ecom.View.Staff
 
         private async void Load()
         {
-            StaffMembers = new List<StaffListViewModel>(await _service.FetchAllUsers());
+            StaffMembers = new List<StaffListViewModel>(await _service.FetchAllStaff());
             OnPropertyChanged(nameof(StaffMembers));
         }
 
@@ -70,6 +68,7 @@ namespace Ecom.View.Staff
 
             buttonColumn.CellTemplate = buttonTemplate;
 
+            DataGrid_StaffList.Columns.RemoveAt(0);
             DataGrid_StaffList.Columns.Add(buttonColumn);
         }
 
@@ -78,8 +77,13 @@ namespace Ecom.View.Staff
             StaffDetailVeiwer.Content = null;
             var details = Globals.ServiceProvider.GetRequiredService<StaffDetail>();
             details.Load(viewModel);
+
+            details.Subscribe += (sender, args) => { Load(); };
+
             StaffDetailVeiwer.Content = details;
         }
+
+
 
         protected void OnPropertyChanged([CallerMemberName] string name = null)
         {
