@@ -11,5 +11,16 @@ namespace Ecom.Helpers
         public static IMapper Mapper { get; set; }
 
         public static Notifier Notifier { get; set; }
+
+        public enum DaysOfWeek
+        {
+            Monday,
+            Tuesday,
+            Wednesday,
+            Thursday,
+            Friday,
+            Saturday,
+            Sunday
+        }
     }
 }
