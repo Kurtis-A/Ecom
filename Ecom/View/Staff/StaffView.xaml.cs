@@ -1,13 +1,13 @@
 ﻿using Ecom.Helpers;
 using Ecom.Services;
 using Ecom.ViewModel.Staff;
-using Microsoft.Extensions.DependencyInjection;
-using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
+using ToastNotifications.Messages;
 
 namespace Ecom.View.Staff
 {
@@ -19,6 +19,7 @@ namespace Ecom.View.Staff
         private readonly StaffService _service;
 
         public event PropertyChangedEventHandler PropertyChanged;
+        public StaffViewModel ViewModel;
 
         public StaffView(StaffService service)
         {
@@ -26,17 +27,15 @@ namespace Ecom.View.Staff
 
             _service = service;
 
-            DataContext = this;
+            DataContext = ViewModel = new StaffViewModel();
 
             Load();
         }
 
-        public List<StaffListViewModel> StaffMembers { get; set; }
-
         private async void Load()
         {
-            StaffMembers = new List<StaffListViewModel>(await _service.FetchAllStaff());
-            OnPropertyChanged(nameof(StaffMembers));
+            ViewModel.StaffMembers = new ObservableCollection<StaffListViewModel>(await _service.FetchAllStaff());
+            OnPropertyChanged(nameof(ViewModel.StaffMembers));
         }
 
         private void DataGrid_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
@@ -61,29 +60,46 @@ namespace Ecom.View.Staff
             buttonTemplate.VisualTree = panelFactory;
 
             FrameworkElementFactory buttonAFactory = new FrameworkElementFactory(typeof(Button));
-            buttonAFactory.AddHandler(ButtonBase.ClickEvent, new RoutedEventHandler((o,e) => LoadStaffDetails((o as Button).DataContext as StaffListViewModel)));
+            buttonAFactory.AddHandler(ButtonBase.ClickEvent, new RoutedEventHandler((o, e) => LoadStaffDetails()));
             buttonAFactory.SetValue(StyleProperty, Application.Current.FindResource("EcomDataGridViewButton") as Style);
             buttonAFactory.SetValue(ToolTipProperty, "View Staff Member");
             panelFactory.AppendChild(buttonAFactory);
 
             buttonColumn.CellTemplate = buttonTemplate;
 
-            DataGrid_StaffList.Columns.RemoveAt(0);
+            DataGrid_StaffList.Columns.Remove(buttonColumn);
             DataGrid_StaffList.Columns.Add(buttonColumn);
         }
 
-        private void LoadStaffDetails(StaffListViewModel viewModel)
+        private async void LoadStaffDetails()
         {
-            StaffDetailVeiwer.Content = null;
-            var details = Globals.ServiceProvider.GetRequiredService<StaffDetail>();
-            details.Load(viewModel);
-
-            details.Subscribe += (sender, args) => { Load(); };
-
-            StaffDetailVeiwer.Content = details;
+            var selected = DataGrid_StaffList.SelectedItem as StaffListViewModel;
+            var staffMember = await _service.FetchStaffById(selected.Id);
+            if (staffMember == null)
+            {
+                Globals.Notifier.ShowWarning("Staff Member Details not found");
+            }
+            else
+            {
+                Globals.Mapper.Map(staffMember, ViewModel);
+                Globals.Notifier.ShowSuccess("Staff Member Details Loaded");
+            }
         }
 
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Globals.Notifier.ShowInformation("Button 1 Clicked");
+        }
 
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            Globals.Notifier.ShowInformation("Button 2 Clicked");
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            Globals.Notifier.ShowInformation("Button 3 Clicked");
+        }
 
         protected void OnPropertyChanged([CallerMemberName] string name = null)
         {
