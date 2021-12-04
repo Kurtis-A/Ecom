@@ -64,17 +64,21 @@ namespace Ecom
                 cfg.CreateMap<StaffListViewModel, Staff>();
 
                 cfg.CreateMap<StaffViewModel, Staff>()
-                .ForSourceMember(x => x.StaffMembers, options => options.DoNotValidate());
+                .ForSourceMember(x => x.StaffMembers, options => options.DoNotValidate())
+                .ForSourceMember(x => x.DisplayAddress, options => options.DoNotValidate())
+                .ForSourceMember(x => x.DisplayAvailability, options => options.DoNotValidate());
 
                 cfg.CreateMap<Staff, StaffListViewModel>();
 
                 cfg.CreateMap<Staff, StaffViewModel>()
                 .ForMember(x => x.StaffMembers, options => options.Ignore())
-                .ForMember(x => x.DisplayAddress, options => options.Ignore());
+                .ForMember(x => x.DisplayAddress, options => options.Ignore())
+                .ForMember(x => x.DisplayAvailability, options => options.Ignore());
 
                 cfg.CreateMap<StaffViewModel, StaffViewModel>()
                 .ForMember(x => x.StaffMembers, options => options.Ignore())
-                .ForMember(x => x.DisplayAddress, options => options.Ignore());
+                .ForMember(x => x.DisplayAddress, options => options.Ignore())
+                .ForMember(x => x.DisplayAvailability, options => options.Ignore());
             });
 
             Globals.Mapper = config.CreateMapper();
