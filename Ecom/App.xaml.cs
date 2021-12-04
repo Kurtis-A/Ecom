@@ -62,9 +62,19 @@ namespace Ecom
             var config = new MapperConfiguration(cfg =>
             {
                 cfg.CreateMap<StaffListViewModel, Staff>();
-                cfg.CreateMap<StaffViewModel, Staff>();
+
+                cfg.CreateMap<StaffViewModel, Staff>()
+                .ForSourceMember(x => x.StaffMembers, options => options.DoNotValidate());
+
                 cfg.CreateMap<Staff, StaffListViewModel>();
-                cfg.CreateMap<Staff, StaffViewModel>();
+
+                cfg.CreateMap<Staff, StaffViewModel>()
+                .ForMember(x => x.StaffMembers, options => options.Ignore())
+                .ForMember(x => x.DisplayAddress, options => options.Ignore());
+
+                cfg.CreateMap<StaffViewModel, StaffViewModel>()
+                .ForMember(x => x.StaffMembers, options => options.Ignore())
+                .ForMember(x => x.DisplayAddress, options => options.Ignore());
             });
 
             Globals.Mapper = config.CreateMapper();
@@ -77,7 +87,6 @@ namespace Ecom
             //Views
             services.AddSingleton(typeof(BaseWindow));
             services.AddSingleton(typeof(StaffView));
-            services.AddSingleton(typeof(StaffDetail));
 
             //View Model
             services.AddScoped<StaffViewModel>();
