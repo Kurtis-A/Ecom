@@ -86,19 +86,28 @@ namespace Ecom.View.Staff
             }
         }
 
-        private void PersonalSave_Click(object sender, RoutedEventArgs e)
+        private async void PersonalSave_Click(object sender, RoutedEventArgs e)
         {
-            Globals.Notifier.ShowInformation("Button 1 Clicked");
+            if (await _service.UpdateStaffMember(ViewModel))
+                Globals.Notifier.ShowSuccess("Personal Details Updated");
+            else
+                Globals.Notifier.ShowError("Oh no! Something went wrong while updating personal details");
         }
 
-        private void AddressSave_Click(object sender, RoutedEventArgs e)
+        private async void AddressSave_Click(object sender, RoutedEventArgs e)
         {
-            Globals.Notifier.ShowInformation("Button 2 Clicked");
+            if (await _service.UpdateStaffMember(ViewModel))
+                Globals.Notifier.ShowSuccess("Address Details Updated");
+            else
+                Globals.Notifier.ShowError("Oh no! Something went wrong while updating address details");
         }
 
-        private void EmploymentSave_Click(object sender, RoutedEventArgs e)
+        private async void EmploymentSave_Click(object sender, RoutedEventArgs e)
         {
-            Globals.Notifier.ShowInformation("Button 3 Clicked");
+            if (await _service.UpdateStaffMember(ViewModel))
+                Globals.Notifier.ShowSuccess("Employment Details Updated");
+            else
+                Globals.Notifier.ShowError("Oh no! Something went wrong while updating employment details");
         }
 
         protected void OnPropertyChanged([CallerMemberName] string name = null)
