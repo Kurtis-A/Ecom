@@ -1,9 +1,9 @@
 ﻿using Ecom.Helpers;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
 
 namespace Ecom.ViewModel.Staff
 {
@@ -13,12 +13,19 @@ namespace Ecom.ViewModel.Staff
         private string _username;
         private string firstName;
         private string surname;
+        private DateTime dateOfBirth;
         private DateTime startDate;
         private DateTime? leaveDate;
         private string addressLine1;
         private string addressLine2;
         private string addressLine3;
         private string postcode;
+        private ObservableCollection<StaffListViewModel> staffMembers;
+        private string contactEmail;
+        private string contactNumber;
+        private string displayAddress;
+        private string preference;
+        private string displayAvailability;
 
         public int Id { get; set; }
 
@@ -31,6 +38,7 @@ namespace Ecom.ViewModel.Staff
             {
                 _username = value;
                 Validate(value);
+                OnPropertyChanged();
             }
         }
 
@@ -42,6 +50,7 @@ namespace Ecom.ViewModel.Staff
             {
                 firstName = value;
                 Validate(value);
+                OnPropertyChanged();
             }
         }
 
@@ -53,6 +62,19 @@ namespace Ecom.ViewModel.Staff
             {
                 surname = value;
                 Validate(value);
+                OnPropertyChanged();
+            }
+        }
+
+        [Required(ErrorMessage = "Please enter a Surname")]
+        public DateTime DateOfBirth
+        {
+            get => dateOfBirth;
+            set
+            {
+                dateOfBirth = value;
+                Validate(value);
+                OnPropertyChanged();
             }
         }
 
@@ -64,6 +86,7 @@ namespace Ecom.ViewModel.Staff
             {
                 _role = value;
                 Validate(value);
+                OnPropertyChanged();
             }
         }
 
@@ -75,6 +98,7 @@ namespace Ecom.ViewModel.Staff
             {
                 startDate = value;
                 Validate(value);
+                OnPropertyChanged();
             }
         }
 
@@ -84,10 +108,19 @@ namespace Ecom.ViewModel.Staff
             set
             {
                 leaveDate = value;
+                OnPropertyChanged();
             }
         }
 
-        public string Preference { get; set; }
+        public string Preference
+        {
+            get => preference;
+            set
+            {
+                preference = value;
+                OnPropertyChanged();
+            }
+        }
 
         public bool AvailMonday
         {
@@ -100,6 +133,7 @@ namespace Ecom.ViewModel.Staff
                     RemovePreference(Globals.DaysOfWeek.Monday.ToString());
 
                 OnPropertyChanged();
+                OnPropertyChanged(nameof(DisplayAvailability));
             }
         }
 
@@ -114,6 +148,7 @@ namespace Ecom.ViewModel.Staff
                     RemovePreference(Globals.DaysOfWeek.Tuesday.ToString());
 
                 OnPropertyChanged();
+                OnPropertyChanged(nameof(DisplayAvailability));
             }
         }
 
@@ -128,6 +163,7 @@ namespace Ecom.ViewModel.Staff
                     RemovePreference(Globals.DaysOfWeek.Wednesday.ToString());
 
                 OnPropertyChanged();
+                OnPropertyChanged(nameof(DisplayAvailability));
             }
         }
 
@@ -142,6 +178,7 @@ namespace Ecom.ViewModel.Staff
                     RemovePreference(Globals.DaysOfWeek.Thursday.ToString());
 
                 OnPropertyChanged();
+                OnPropertyChanged(nameof(DisplayAvailability));
             }
         }
 
@@ -156,6 +193,7 @@ namespace Ecom.ViewModel.Staff
                     RemovePreference(Globals.DaysOfWeek.Friday.ToString());
 
                 OnPropertyChanged();
+                OnPropertyChanged(nameof(DisplayAvailability));
             }
         }
 
@@ -170,6 +208,7 @@ namespace Ecom.ViewModel.Staff
                     RemovePreference(Globals.DaysOfWeek.Saturday.ToString());
 
                 OnPropertyChanged();
+                OnPropertyChanged(nameof(DisplayAvailability));
             }
         }
 
@@ -184,33 +223,43 @@ namespace Ecom.ViewModel.Staff
                     RemovePreference(Globals.DaysOfWeek.Sunday.ToString());
 
                 OnPropertyChanged();
+                OnPropertyChanged(nameof(DisplayAvailability));
             }
         }
 
+        [DisplayName("(Apartment x) House Name / Number")]
         public string AddressLine1
         {
             get => addressLine1;
             set
             {
                 addressLine1 = value;
+                OnPropertyChanged();
+                OnPropertyChanged(nameof(DisplayAddress));
             }
         }
 
+        [DisplayName("Street Name")]
         public string? AddressLine2
         {
             get => addressLine2;
             set
             {
                 addressLine2 = value;
+                OnPropertyChanged();
+                OnPropertyChanged(nameof(DisplayAddress));
             }
         }
 
+        [DisplayName("Town / City Name")]
         public string? AddressLine3
         {
             get => addressLine3;
             set
             {
                 addressLine3 = value;
+                OnPropertyChanged();
+                OnPropertyChanged(nameof(DisplayAddress));
             }
         }
 
@@ -220,22 +269,97 @@ namespace Ecom.ViewModel.Staff
             set
             {
                 postcode = value;
+                OnPropertyChanged();
+                OnPropertyChanged(nameof(DisplayAddress));
             }
+        }
+
+        [DisplayName("Phone Number")]
+        public string ContactNumber
+        {
+            get => contactNumber;
+            set
+            {
+                contactNumber = value;
+                OnPropertyChanged();
+            }
+        }
+
+        [DisplayName("Email Address")]
+        public string ContactEmail
+        {
+            get => contactEmail;
+            set
+            {
+                contactEmail = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public ObservableCollection<StaffListViewModel> StaffMembers
+        {
+            get => staffMembers;
+            set
+            {
+                staffMembers = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string DisplayAddress => GenerateDisplayAddress();
+
+        public string DisplayAvailability => GenerateDisplayAvailability();
+
+        private string GenerateDisplayAddress()
+        {
+            var address = string.Empty;
+            if (!string.IsNullOrEmpty(addressLine1))
+                address += $"{addressLine1}, ";
+
+            if (!string.IsNullOrEmpty(addressLine2))
+                address += $"{addressLine2}, ";
+
+            if (!string.IsNullOrEmpty(addressLine3))
+                address += $"{addressLine3}, ";
+
+            if (!string.IsNullOrEmpty(postcode))
+                address += $"{postcode}";
+
+            return address;
+        }
+
+        private string GenerateDisplayAvailability()
+        {
+            var dayCount = Preference?.Split(",", StringSplitOptions.RemoveEmptyEntries).Length;
+            
+            if (dayCount == null) return $"Available 0 days a week";
+
+            if (dayCount == 1)
+                return $"Available {dayCount} day a week";
+            else
+                return $"Available {dayCount} days a week";
         }
 
         private bool GetPreference(string key)
         {
-            return Preference.Contains(key);
+            if (Preference != null)
+                return Preference.Contains(key);
+
+            return false;
         }
 
         private void RemovePreference(string key)
         {
-            Preference = Preference.Replace($"{key},", string.Empty);
+            if (Preference.Contains(key))
+                Preference = Preference.Replace($"{key},", string.Empty);
         }
 
         private void AddPreference(string key)
         {
-            Preference += $"{key},";
+            if (!Preference.Contains(key))
+                Preference += $"{key},";
         }
+
+
     }
 }
