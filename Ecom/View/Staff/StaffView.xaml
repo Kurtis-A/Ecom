@@ -58,6 +58,7 @@
             <Button Grid.Column="1"
                     HorizontalAlignment="Right"
                     Margin="10"
+                    VerticalAlignment="Center"
                     Click="AddNewStaff_Click">
                 <StackPanel Orientation="Horizontal">
                     <materialDesign:PackIcon Kind="AccountAdd"
@@ -115,7 +116,7 @@
                         <RowDefinition/>
                         <RowDefinition/>
                         <RowDefinition/>
-                        <RowDefinition/>
+                        <RowDefinition Height="auto"/>
                         <RowDefinition/>
                     </Grid.RowDefinitions>
 
@@ -155,7 +156,7 @@
                                VerticalAlignment="Center"
                                HorizontalAlignment="Left"
                                Margin="10"
-                               Text="{Binding Firstname, NotifyOnSourceUpdated=True, Mode=TwoWay}"/>
+                               Text="{Binding DisplayName, NotifyOnSourceUpdated=True, Mode=OneWay}"/>
 
                     <TextBlock Grid.Column="1"
                                Grid.ColumnSpan="3"
@@ -163,7 +164,7 @@
                                VerticalAlignment="Center"
                                HorizontalAlignment="Left"
                                Margin="10"
-                               Text="{Binding Username, NotifyOnSourceUpdated=True, Mode=TwoWay}"/>
+                               Text="{Binding Username, NotifyOnSourceUpdated=True, Mode=OneWay}"/>
 
                     <TextBlock Grid.Column="1"
                                Grid.ColumnSpan="3"
@@ -171,7 +172,7 @@
                                VerticalAlignment="Center"
                                HorizontalAlignment="Left"
                                Margin="10"
-                               Text="{Binding Role, NotifyOnSourceUpdated=True, Mode=TwoWay}"/>
+                               Text="{Binding Role, NotifyOnSourceUpdated=True, Mode=OneWay}"/>
 
                     <TextBlock Grid.Column="1"
                                Grid.ColumnSpan="3"

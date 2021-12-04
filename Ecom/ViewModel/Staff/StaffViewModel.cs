@@ -1,6 +1,5 @@
 ﻿using Ecom.Helpers;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
@@ -23,9 +22,7 @@ namespace Ecom.ViewModel.Staff
         private ObservableCollection<StaffListViewModel> staffMembers;
         private string contactEmail;
         private string contactNumber;
-        private string displayAddress;
         private string preference;
-        private string displayAvailability;
 
         public int Id { get; set; }
 
@@ -51,6 +48,7 @@ namespace Ecom.ViewModel.Staff
                 firstName = value;
                 Validate(value);
                 OnPropertyChanged();
+                OnPropertyChanged(nameof(DisplayName));
             }
         }
 
@@ -63,6 +61,7 @@ namespace Ecom.ViewModel.Staff
                 surname = value;
                 Validate(value);
                 OnPropertyChanged();
+                OnPropertyChanged(nameof(DisplayName));
             }
         }
 
@@ -306,9 +305,13 @@ namespace Ecom.ViewModel.Staff
             }
         }
 
+        public string DisplayName => GenerateDisplayName();
+
         public string DisplayAddress => GenerateDisplayAddress();
 
         public string DisplayAvailability => GenerateDisplayAvailability();
+
+        private string GenerateDisplayName() => $"{Firstname ?? string.Empty} {Surname ?? string.Empty}";
 
         private string GenerateDisplayAddress()
         {
@@ -317,10 +320,10 @@ namespace Ecom.ViewModel.Staff
                 address += $"{addressLine1} ";
 
             if (!string.IsNullOrEmpty(addressLine2))
-                address += $"{addressLine2}, ";
+                address += $"{addressLine2}, \n";
 
             if (!string.IsNullOrEmpty(addressLine3))
-                address += $"{addressLine3}, ";
+                address += $"{addressLine3}, \n";
 
             if (!string.IsNullOrEmpty(postcode))
                 address += $"{postcode}";
