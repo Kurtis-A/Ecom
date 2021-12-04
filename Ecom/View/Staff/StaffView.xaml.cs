@@ -86,7 +86,7 @@ namespace Ecom.View.Staff
             var staffMember = await _service.FetchStaffById(selected.Id);
             if (staffMember == null)
             {
-                Globals.Notifier.ShowWarning("Staff Member Details not found");
+                Globals.Notifier.ShowWarning("Oopps! Something went wrong. I couldn't find that Staff Member");
             }
             else
             {
