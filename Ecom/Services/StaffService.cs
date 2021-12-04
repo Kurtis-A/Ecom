@@ -32,6 +32,20 @@ namespace Ecom.Services
             return results == null ? viewModel : Globals.Mapper.Map<StaffViewModel>(results);
         }
 
+        public async Task<bool> CreateNewStaffMember(StaffViewModel viewModel)
+        {
+            try
+            {
+                await _staffRepository.Add(Globals.Mapper.Map<Staff>(viewModel));
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Globals.Notifier.ShowError($"An error occured: {ex.Message}");
+            }
+            return false;   
+        }
+
         public async Task<bool> UpdateStaffMember(StaffViewModel viewModel)
         {
             try
