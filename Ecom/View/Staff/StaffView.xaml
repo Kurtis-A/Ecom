@@ -295,7 +295,7 @@
                             </ScrollViewer>
 
                             <Button Command="{x:Static materialDesign:Flipper.FlipCommand}"
-                                    Click="Button_Click"
+                                    Click="PersonalSave_Click"
                                     Grid.Row="5"
                                     VerticalAlignment="Center"
                                     HorizontalAlignment="Center"
@@ -412,7 +412,7 @@
                             </ScrollViewer>
 
                             <Button Command="{x:Static materialDesign:Flipper.FlipCommand}"
-                                    Click="Button_Click_1"
+                                    Click="AddressSave_Click"
                                     Grid.Row="5"
                                     VerticalAlignment="Center"
                                     HorizontalAlignment="Center"
@@ -540,7 +540,7 @@
                             </ScrollViewer>
 
                             <Button Command="{x:Static materialDesign:Flipper.FlipCommand}"
-                                    Click="Button_Click_2"
+                                    Click="EmploymentSave_Click"
                                     Grid.Row="5"
                                     VerticalAlignment="Center"
                                     HorizontalAlignment="Center"

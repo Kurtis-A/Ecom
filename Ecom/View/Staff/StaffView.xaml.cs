@@ -86,17 +86,17 @@ namespace Ecom.View.Staff
             }
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void PersonalSave_Click(object sender, RoutedEventArgs e)
         {
             Globals.Notifier.ShowInformation("Button 1 Clicked");
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void AddressSave_Click(object sender, RoutedEventArgs e)
         {
             Globals.Notifier.ShowInformation("Button 2 Clicked");
         }
 
-        private void Button_Click_2(object sender, RoutedEventArgs e)
+        private void EmploymentSave_Click(object sender, RoutedEventArgs e)
         {
             Globals.Notifier.ShowInformation("Button 3 Clicked");
         }
