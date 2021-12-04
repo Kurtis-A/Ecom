@@ -227,7 +227,7 @@ namespace Ecom.ViewModel.Staff
             }
         }
 
-        [DisplayName("(Apartment x) House Name / Number")]
+        [DisplayName("House Name / Number")]
         public string AddressLine1
         {
             get => addressLine1;
@@ -314,7 +314,7 @@ namespace Ecom.ViewModel.Staff
         {
             var address = string.Empty;
             if (!string.IsNullOrEmpty(addressLine1))
-                address += $"{addressLine1}, ";
+                address += $"{addressLine1} ";
 
             if (!string.IsNullOrEmpty(addressLine2))
                 address += $"{addressLine2}, ";
