@@ -3,6 +3,7 @@ using Ecom.Services;
 using Ecom.ViewModel.Staff;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
@@ -59,15 +60,24 @@ namespace Ecom.View.Staff
             FrameworkElementFactory panelFactory = new FrameworkElementFactory(typeof(WrapPanel));
             buttonTemplate.VisualTree = panelFactory;
 
-            FrameworkElementFactory buttonAFactory = new FrameworkElementFactory(typeof(Button));
-            buttonAFactory.AddHandler(ButtonBase.ClickEvent, new RoutedEventHandler((o, e) => LoadStaffDetails()));
-            buttonAFactory.SetValue(StyleProperty, Application.Current.FindResource("EcomDataGridViewButton") as Style);
-            buttonAFactory.SetValue(ToolTipProperty, "View Staff Member");
-            panelFactory.AppendChild(buttonAFactory);
+            //Todo: Add Check for permission
+            FrameworkElementFactory viewButtonFactory = new FrameworkElementFactory(typeof(Button));
+            viewButtonFactory.AddHandler(ButtonBase.ClickEvent, new RoutedEventHandler((o, e) => LoadStaffDetails()));
+            viewButtonFactory.SetValue(StyleProperty, Application.Current.FindResource("EcomDataGridViewButton") as Style);
+            viewButtonFactory.SetValue(ToolTipProperty, "View Staff Member");
+            panelFactory.AppendChild(viewButtonFactory);
+
+            //Todo: Add Check for permission
+            FrameworkElementFactory deleteButtonFactory = new FrameworkElementFactory(typeof(Button));
+            deleteButtonFactory.AddHandler(ButtonBase.ClickEvent, new RoutedEventHandler((o, e) => LoadStaffDetails()));
+            deleteButtonFactory.SetValue(StyleProperty, Application.Current.FindResource("EcomDataGridDeleteButton") as Style);
+            deleteButtonFactory.SetValue(ToolTipProperty, "Delete Staff Member");
+            panelFactory.AppendChild(deleteButtonFactory);
+
 
             buttonColumn.CellTemplate = buttonTemplate;
 
-            DataGrid_StaffList.Columns.Remove(buttonColumn);
+            DataGrid_StaffList.Columns.RemoveAt(0); 
             DataGrid_StaffList.Columns.Add(buttonColumn);
         }
 
@@ -89,7 +99,10 @@ namespace Ecom.View.Staff
         private async void PersonalSave_Click(object sender, RoutedEventArgs e)
         {
             if (await _service.UpdateStaffMember(ViewModel))
+            { 
                 Globals.Notifier.ShowSuccess("Personal Details Updated");
+                Load();
+            }
             else
                 Globals.Notifier.ShowError("Oh no! Something went wrong while updating personal details");
         }
@@ -97,7 +110,10 @@ namespace Ecom.View.Staff
         private async void AddressSave_Click(object sender, RoutedEventArgs e)
         {
             if (await _service.UpdateStaffMember(ViewModel))
+            {
                 Globals.Notifier.ShowSuccess("Address Details Updated");
+                Load();
+            }
             else
                 Globals.Notifier.ShowError("Oh no! Something went wrong while updating address details");
         }
@@ -105,7 +121,10 @@ namespace Ecom.View.Staff
         private async void EmploymentSave_Click(object sender, RoutedEventArgs e)
         {
             if (await _service.UpdateStaffMember(ViewModel))
+            {
                 Globals.Notifier.ShowSuccess("Employment Details Updated");
+                Load();
+            }
             else
                 Globals.Notifier.ShowError("Oh no! Something went wrong while updating employment details");
         }
