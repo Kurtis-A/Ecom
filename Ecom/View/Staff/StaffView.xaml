@@ -27,10 +27,16 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <StackPanel Orientation="Horizontal"
-                    Grid.Row="0">
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            
+            <StackPanel Orientation="Horizontal"
+                        Grid.Row="0">
 
-            <TextBox materialDesign:HintAssist.Hint="Search Staff..."
+                <TextBox materialDesign:HintAssist.Hint="Search Staff..."
                      Margin="10"
                      MinWidth="300"
                      Style="{StaticResource MaterialDesignOutlinedTextBox}"
@@ -39,15 +45,31 @@
                      materialDesign:TextFieldAssist.IncludeSpellingSuggestions="True"
                      materialDesign:TextFieldAssist.HasClearButton="True"/>
 
-            <Button Margin="10"
+                <Button Margin="10"
                     Height="40"
                     Width="40"
                     Padding="5"
                     materialDesign:ButtonAssist.CornerRadius="5">
-                <materialDesign:PackIcon Kind="Search"/>
-            </Button>
+                    <materialDesign:PackIcon Kind="Search"/>
+                </Button>
 
-        </StackPanel>
+            </StackPanel>
+
+            <Button Grid.Column="1"
+                    HorizontalAlignment="Right"
+                    Margin="10"
+                    Click="AddNewStaff_Click">
+                <StackPanel Orientation="Horizontal">
+                    <materialDesign:PackIcon Kind="AccountAdd"
+                                             VerticalAlignment="Center"/>
+                    <TextBlock Text="Add New Staff Member"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Left"
+                               Margin="10 0"/>
+                </StackPanel>
+            </Button>
+        </Grid>
+
 
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>

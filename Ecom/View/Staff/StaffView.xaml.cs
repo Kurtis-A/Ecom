@@ -110,9 +110,16 @@ namespace Ecom.View.Staff
                 Globals.Notifier.ShowError("Oh no! Something went wrong while updating employment details");
         }
 
+        private void AddNewStaff_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
         protected void OnPropertyChanged([CallerMemberName] string name = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
+
+
     }
 }
