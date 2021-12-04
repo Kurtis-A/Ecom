@@ -77,7 +77,6 @@ namespace Ecom.View.Staff
 
             buttonColumn.CellTemplate = buttonTemplate;
 
-            DataGrid_StaffList.Columns.RemoveAt(0); 
             DataGrid_StaffList.Columns.Add(buttonColumn);
         }
 
