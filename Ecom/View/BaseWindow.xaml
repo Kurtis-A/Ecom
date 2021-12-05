@@ -102,6 +102,24 @@
                         <ContentPresenter x:Name="StaffView"/>
                         
                     </TabItem>
+
+                    <TabItem>
+                        <TabItem.Header>
+                            <StackPanel Height="Auto"
+                                        Width="Auto">
+                                <materialDesign:PackIcon Kind="ClockAlert"
+                                                            Width="24"
+                                                            Height="24"
+                                                            HorizontalAlignment="Center"/>
+
+                                <TextBlock Text="Absence"
+                                            HorizontalAlignment="Center"/>
+                            </StackPanel>
+                        </TabItem.Header>
+
+                        <ContentPresenter x:Name="AbsenceView"/>
+
+                    </TabItem>
                 </TabControl>
             </Grid>
             

@@ -1,5 +1,8 @@
 ﻿using Ecom.Helpers;
+using Ecom.View.Absence;
+using Ecom.View.Planner;
 using Ecom.View.Staff;
+using Microsoft.Extensions.DependencyInjection;
 using System.Windows;
 using System.Windows.Input;
 using ToastNotifications.Messages;
@@ -15,7 +18,9 @@ namespace Ecom
         {
             InitializeComponent();
 
-            StaffView.Content = Globals.ServiceProvider.GetService(typeof(StaffView));
+            PlannerView.Content = Globals.ServiceProvider.GetRequiredService<RotaPlannerView>();
+            StaffView.Content = Globals.ServiceProvider.GetRequiredService<StaffView>();
+            AbsenceView.Content = Globals.ServiceProvider.GetRequiredService<AbsenceView>();
         }
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e) 
