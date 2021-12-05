@@ -1,9 +1,10 @@
 ﻿using Ecom.Helpers;
 using Ecom.Services;
 using Ecom.ViewModel.Staff;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
+using System.ComponentModel.DataAnnotations;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
@@ -95,6 +96,28 @@ namespace Ecom.View.Staff
             }
         }
 
+        private void ConfigureNewStaffMember()
+        {
+            //Flip Detail Cards
+            flipperPersonal.IsFlipped = true;
+            flipperAddress.IsFlipped = true;
+            flipperEmployment.IsFlipped = true;
+
+            //Disable Save Button
+            PersonalSaveButton.Visibility = Visibility.Collapsed;
+            AddressSaveButton.Visibility = Visibility.Collapsed;
+            EmploymentSaveButton.Visibility = Visibility.Collapsed;
+
+            //Show New Staff Member Card
+            flipperNewStaff.Visibility = Visibility.Visible;
+            flipperNewStaff.IsFlipped = false;
+
+            //New Up StaffViewModel
+            ViewModel = new StaffViewModel();
+
+            DataContext = ViewModel;
+        }
+
         private async void PersonalSave_Click(object sender, RoutedEventArgs e)
         {
             if (await _service.UpdateStaffMember(ViewModel))
@@ -128,16 +151,45 @@ namespace Ecom.View.Staff
                 Globals.Notifier.ShowError("Oh no! Something went wrong while updating employment details");
         }
 
-        private void AddNewStaff_Click(object sender, RoutedEventArgs e)
-        {
+        private void AddNewStaff_Click(object sender, RoutedEventArgs e) => ConfigureNewStaffMember();
 
+        protected void OnPropertyChanged([CallerMemberName] string name = null) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+
+        private void OpenNewStaffPrompt_Click(object sender, RoutedEventArgs e)
+        {
+            DataContext = ViewModel;
+            if (ViewModel.IsValid())
+            {
+                flipperPersonal.IsFlipped = false;
+                flipperAddress.IsFlipped = false;
+                flipperEmployment.IsFlipped = false;
+                flipperNewStaff.IsFlipped = true;
+            }
+            else
+            {
+                flipperPersonal.IsFlipped = true;
+                flipperAddress.IsFlipped = true;
+                flipperEmployment.IsFlipped = true;
+                flipperNewStaff.IsFlipped = false;
+
+                foreach (var error in ViewModel.GetValidationErrors())
+                {
+                    Globals.Notifier.ShowWarning(error);
+                }
+            }
         }
 
-        protected void OnPropertyChanged([CallerMemberName] string name = null)
+        private void CreateStaffMember_Click(object sender, RoutedEventArgs e)
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+            Globals.Notifier.ShowInformation("Staff Member Created Test");
         }
 
-
+        private void CancelCreateStaffMember_Click(object sender, RoutedEventArgs e)
+        {
+            flipperPersonal.IsFlipped = true;
+            flipperAddress.IsFlipped = true;
+            flipperEmployment.IsFlipped = true;
+            flipperNewStaff.IsFlipped = false;
+        }
     }
 }

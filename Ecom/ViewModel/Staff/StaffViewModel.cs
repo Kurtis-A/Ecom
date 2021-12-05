@@ -24,9 +24,13 @@ namespace Ecom.ViewModel.Staff
         private string contactNumber;
         private string preference;
 
+        public StaffViewModel()
+        {
+        }
+
         public int Id { get; set; }
 
-        [Required(ErrorMessage = "Please enter a Username")]
+        [Required(ErrorMessage = "Please enter a Username", AllowEmptyStrings = false)]
         [StringLength(3)]
         public string Username
         {
@@ -34,12 +38,12 @@ namespace Ecom.ViewModel.Staff
             set
             {
                 _username = value;
-                Validate(value);
+                Validate(_username);
                 OnPropertyChanged();
             }
         }
 
-        [Required(ErrorMessage = "Please enter a First Name")]
+        [Required(ErrorMessage = "Please enter a First Name", AllowEmptyStrings = false)]
         public string Firstname
         {
             get => firstName;
@@ -52,7 +56,7 @@ namespace Ecom.ViewModel.Staff
             }
         }
 
-        [Required(ErrorMessage = "Please enter a Surname")]
+        [Required(ErrorMessage = "Please enter a Surname", AllowEmptyStrings = false)]
         public string Surname
         {
             get => surname;
@@ -65,13 +69,19 @@ namespace Ecom.ViewModel.Staff
             }
         }
 
-        [Required(ErrorMessage = "Please enter a Surname")]
-        public DateTime DateOfBirth
+        [Required(ErrorMessage = "Please enter a Date of Birth")]
+        [DataType(DataType.Date)]
+        public DateTime? DateOfBirth
         {
-            get => dateOfBirth;
+            get
+            {
+                if (dateOfBirth < DateTime.Parse("01/01/1900"))
+                    return null;    
+                return dateOfBirth;
+            }
             set
             {
-                dateOfBirth = value;
+                dateOfBirth = (DateTime)value;
                 Validate(value);
                 OnPropertyChanged();
             }
@@ -96,7 +106,7 @@ namespace Ecom.ViewModel.Staff
             set
             {
                 startDate = value;
-                Validate(value);
+                Validate(startDate);
                 OnPropertyChanged();
             }
         }
@@ -226,7 +236,7 @@ namespace Ecom.ViewModel.Staff
             }
         }
 
-        [DisplayName("House Name / Number")]
+        [Required(ErrorMessage = "Please add House Name / Number")]
         public string AddressLine1
         {
             get => addressLine1;
@@ -262,6 +272,7 @@ namespace Ecom.ViewModel.Staff
             }
         }
 
+        [Required(ErrorMessage = "Please add Postcode")]
         public string Postcode
         {
             get => postcode;
@@ -273,7 +284,7 @@ namespace Ecom.ViewModel.Staff
             }
         }
 
-        [DisplayName("Phone Number")]
+        [Required(ErrorMessage = "Please add Contact Number")]
         public string ContactNumber
         {
             get => contactNumber;
@@ -284,7 +295,7 @@ namespace Ecom.ViewModel.Staff
             }
         }
 
-        [DisplayName("Email Address")]
+        [Required(ErrorMessage = "Please add Contact Email Address")]
         public string ContactEmail
         {
             get => contactEmail;
@@ -306,6 +317,10 @@ namespace Ecom.ViewModel.Staff
         }
 
         public string DisplayName => GenerateDisplayName();
+
+        public string DisplayUsername => _username;
+
+        public string DisplayRole => _role;
 
         public string DisplayAddress => GenerateDisplayAddress();
 
@@ -353,13 +368,13 @@ namespace Ecom.ViewModel.Staff
 
         private void RemovePreference(string key)
         {
-            if (Preference.Contains(key))
+            if ((bool)(Preference?.Contains(key)))
                 Preference = Preference.Replace($"{key},", string.Empty);
         }
 
         private void AddPreference(string key)
         {
-            if (!Preference.Contains(key))
+            if ((bool)!Preference?.Contains(key))
                 Preference += $"{key},";
         }
 
