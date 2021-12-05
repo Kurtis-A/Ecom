@@ -1,10 +1,8 @@
 ﻿using Ecom.Helpers;
 using Ecom.Services;
 using Ecom.ViewModel.Staff;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
