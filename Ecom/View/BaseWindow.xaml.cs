@@ -4,6 +4,7 @@ using Ecom.View.Planner;
 using Ecom.View.Staff;
 using Microsoft.Extensions.DependencyInjection;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using ToastNotifications.Messages;
 
@@ -18,9 +19,7 @@ namespace Ecom
         {
             InitializeComponent();
 
-            PlannerView.Content = Globals.ServiceProvider.GetRequiredService<RotaPlannerView>();
-            StaffView.Content = Globals.ServiceProvider.GetRequiredService<StaffView>();
-            AbsenceView.Content = Globals.ServiceProvider.GetRequiredService<AbsenceView>();
+
         }
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e) 
@@ -37,6 +36,33 @@ namespace Ecom
 
         private void Minimise_Click(object sender, RoutedEventArgs e) => Globals.Notifier.ShowInformation("Whoops! Not Implemented yet... Sorry :)");
 
+        private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var control = sender as TabControl;
+            var header = control.SelectedItem as TabItem;
 
+            var selected = header.Name;
+
+            switch (selected)
+            {
+                case "Home":
+                    break;
+
+                case "Planner":
+                    PlannerView.Content = Globals.ServiceProvider.GetRequiredService<RotaPlannerView>();
+                    break;
+
+                case "Shift":
+                    break;
+
+                case "Staff":
+                    StaffView.Content = Globals.ServiceProvider.GetRequiredService<StaffView>();
+                    break;
+
+                case "Absence":
+                    AbsenceView.Content = Globals.ServiceProvider.GetRequiredService<AbsenceView>();
+                    break;
+            }
+        }
     }
 }

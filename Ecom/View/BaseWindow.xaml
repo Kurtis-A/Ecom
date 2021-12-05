@@ -29,8 +29,9 @@
                             materialDesign:ColorZoneAssist.Mode="Standard"
                             materialDesign:NavigationRailAssist.ShowSelectionBackground="True"
                             TabStripPlacement="Top"
-                            Background="Transparent">
-                    <TabItem>
+                            Background="Transparent"
+                            SelectionChanged="TabControl_SelectionChanged">
+                    <TabItem Name="Home">
                         <TabItem.Header>
                             <StackPanel Height="Auto"
                                         Width="Auto">
@@ -49,7 +50,7 @@
                     </TabItem>
                     
                     
-                    <TabItem>
+                    <TabItem Name="Planner"> 
                         <TabItem.Header>
                             <StackPanel Height="Auto"
                                         Width="Auto">
@@ -67,7 +68,7 @@
                         
                     </TabItem>
 
-                    <TabItem>
+                    <TabItem Name="Shift">
                         <TabItem.Header>
                             <StackPanel Height="Auto"
                                         Width="Auto">
@@ -85,7 +86,7 @@
                         
                     </TabItem>
 
-                    <TabItem>
+                    <TabItem Name="Staff">
                         <TabItem.Header>
                             <StackPanel Height="Auto"
                                         Width="Auto">
@@ -103,7 +104,7 @@
                         
                     </TabItem>
 
-                    <TabItem>
+                    <TabItem Name="Absence">
                         <TabItem.Header>
                             <StackPanel Height="Auto"
                                         Width="Auto">
