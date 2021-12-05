@@ -24,6 +24,8 @@ namespace Ecom.Services
             return Globals.Mapper.Map<List<Staff>, List<StaffListViewModel>>(results);
         }
 
+        public async Task<List<StaffViewModel>> FetchAllStaffAvailability() => Globals.Mapper.Map<List<Staff>, List<StaffViewModel>>(await _staffRepository.FindAll());
+
         public async Task<StaffViewModel> FetchStaffById(int id)
         {
             var results = await _staffRepository.Find(id);
