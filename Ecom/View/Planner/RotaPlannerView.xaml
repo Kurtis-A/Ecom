@@ -1,0 +1,427 @@
+﻿<UserControl x:Class="Ecom.View.Planner.RotaPlannerView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Ecom.View.Planner"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" 
+             d:DesignHeight="660" d:DesignWidth="1400">
+    <Grid>
+        <Grid.Resources>
+            <Style TargetType="{x:Type materialDesign:Card}">
+                <Setter Property="Margin" Value="5"/>
+            </Style>
+
+            <Style TargetType="{x:Type StackPanel}">
+                <Setter Property="Margin" Value="5"/>
+            </Style>
+
+            <Style TargetType="{x:Type WrapPanel}">
+                <Setter Property="Margin" Value="5"/>
+            </Style>
+
+            <Style TargetType="{x:Type TextBox}">
+                <Setter Property="Foreground" Value="{DynamicResource MaterialDesignBodyLight}"/>
+            </Style>
+        </Grid.Resources>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Label Grid.Row="0"
+               Content="Team Availability"
+               VerticalAlignment="Center"
+               HorizontalAlignment="Left"
+               Margin="10 0"
+               FontSize="26"/>
+
+        <StackPanel Grid.Row="1"
+                    Orientation="Horizontal">
+
+            <DatePicker Margin="10 5"
+                        Style="{StaticResource MaterialDesignFilledDatePicker}"
+                        HorizontalAlignment="Left"
+                        Width="210"
+                        materialDesign:HintAssist.Hint="Select Rota Start Date"
+                        x:Name="SelectedDate"/>
+
+            <Button Height="44"
+                    Width="44"
+                    Padding="0"
+                    Style="{StaticResource MaterialDesignFlatButton}">
+                <materialDesign:PackIcon Kind="ArrowLeft"
+                                         Width="30"
+                                         Height="30"/>
+            </Button>
+
+            <Button Height="44"
+                    Width="44"
+                    Padding="0"
+                    Style="{StaticResource MaterialDesignFlatButton}">
+                <materialDesign:PackIcon Kind="ArrowRight"
+                                         Width="30"
+                                         Height="30"/>
+            </Button>
+        </StackPanel>
+
+
+        <Grid Grid.Row="2"
+              Margin="5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+            <!--Day 1 Availability-->
+            <materialDesign:Card Grid.Column="0">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+
+                    <Border Grid.Row="0"
+                            Background="{DynamicResource PrimaryHueMidBrush}">
+                        <StackPanel>
+
+                            <TextBlock Text="MONDAY"
+                                       FontSize="18"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Center"
+                                       x:Name="Day1_Day"/>
+
+                            <TextBlock Text="01/01/2022"
+                                       FontSize="14"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Center"
+                                       x:Name="Day1_Date"/>
+
+                        </StackPanel>
+                    </Border>
+
+
+                    <WrapPanel x:Name="Day1Avail"
+                               Grid.Row="1"/>
+                </Grid>
+            </materialDesign:Card>
+
+            <!--Day 2 Availability-->
+            <materialDesign:Card Grid.Column="1">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+
+                    <Border Grid.Row="0"
+                            Background="{DynamicResource PrimaryHueMidBrush}">
+                        <StackPanel>
+                            
+                            <TextBlock Text="TUESDAY"
+                                       FontSize="18"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Center"
+                                       x:Name="Day2_Day"/>
+                            
+                            <TextBlock Text="01/01/2022"
+                                       FontSize="14"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Center"
+                                       x:Name="Day2_Date"/>
+                        </StackPanel>
+                    </Border>
+
+                    <WrapPanel x:Name="Day2Avail"
+                               Grid.Column="1"/>
+                </Grid>
+            </materialDesign:Card>
+
+            <!--Day 3 Availability-->
+            <materialDesign:Card Grid.Column="2">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+
+                    <Border Grid.Row="0"
+                            Background="{DynamicResource PrimaryHueMidBrush}">
+                        <StackPanel>
+                            
+                            <TextBlock Text="WEDNESDAY"
+                                       FontSize="18"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Center"
+                                       x:Name="Day3_Day"/>
+                            
+                           <TextBlock Text="01/01/2022"
+                                       FontSize="14"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Center"
+                                       x:Name="Day3_Date"/>
+
+                        </StackPanel>
+                    </Border>
+
+                    <WrapPanel x:Name="Day3Avail"
+                               Grid.Row="1"/>
+                </Grid>
+            </materialDesign:Card>
+
+            <!--Day 4 Availability-->
+            <materialDesign:Card Grid.Column="3">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+
+                    <Border Grid.Row="0"
+                            Background="{DynamicResource PrimaryHueMidBrush}">
+                        <StackPanel>
+                            
+                            <TextBlock Text="THURSDAY"
+                                       FontSize="18"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Center"
+                                       x:Name="Day4_Day"/>
+                            
+                            <TextBlock Text="01/01/2022"
+                                       FontSize="14"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Center"
+                                       x:Name="Day4_Date"/>
+
+                        </StackPanel>
+                    </Border>
+
+                    <WrapPanel x:Name="Day4Avail"
+                               Grid.Row="1"/>
+                </Grid>
+            </materialDesign:Card>
+
+            <!--Day 5 Availability-->
+            <materialDesign:Card Grid.Column="4">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+
+                    <Border Grid.Row="0"
+                            Background="{DynamicResource PrimaryHueMidBrush}">
+                        <StackPanel>
+                            
+                            <TextBlock Text="FRIDAY"
+                                       FontSize="18"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Center"
+                                       x:Name="Day5_Day"/>
+                            
+                            <TextBlock Text="01/01/2022"
+                                       FontSize="14"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Center"
+                                       x:Name="Day5_Date"/>
+
+                        </StackPanel>
+                    </Border>
+
+                    <WrapPanel x:Name="Day5Avail"
+                               Grid.Row="1"/>
+                </Grid>
+            </materialDesign:Card>
+
+            <!--Day 6 Availability-->
+            <materialDesign:Card Grid.Column="5">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+
+                    <Border Grid.Row="0"
+                            Background="{DynamicResource PrimaryHueMidBrush}">
+                        <StackPanel>
+                            
+                            <TextBlock Text="SATURDAY"
+                                       FontSize="18"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Center"
+                                       x:Name="Day6_Day"/>
+                            
+                            <TextBlock Text="01/01/2022"
+                                       FontSize="14"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Center"
+                                       x:Name="Day6_Date"/>
+                            
+                        </StackPanel>
+                    </Border>
+
+                    <WrapPanel x:Name="Day6Avail"
+                               Grid.Row="1"/>
+                </Grid>
+            </materialDesign:Card>
+
+            <!--Day 7 Availability-->
+            <materialDesign:Card Grid.Column="6">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+
+                    <Border Grid.Row="0"
+                            Background="{DynamicResource PrimaryHueMidBrush}">
+                        <StackPanel>
+
+                            <TextBlock Text="SUNDAY"
+                                       FontSize="18"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Center"
+                                       x:Name="Day7_Day"/>
+
+                            <TextBlock Text="01/01/2022"
+                                       FontSize="14"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Center"
+                                       x:Name="Day7_Date"/>
+
+                        </StackPanel>
+                    </Border>
+
+                    <WrapPanel x:Name="Day7Avail"
+                               Grid.Row="1"/>
+                </Grid>
+            </materialDesign:Card>
+        </Grid>
+
+        <Label Grid.Row="3"
+               Content="Team Rota"
+               VerticalAlignment="Center"
+               HorizontalAlignment="Left"
+               Margin="10 0"
+               FontSize="26"/>
+
+        <Grid Grid.Row="4">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Grid.Column="0">
+                <TextBlock Text="MONDAY"
+                           FontSize="14"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Center"
+                           x:Name="Day1_DayRota"/>
+                <TextBlock Text="01/01/2022"
+                           FontSize="10"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Center"
+                           x:Name="Day1_DateRota"/>
+                <WrapPanel x:Name="Day1Rota"/>
+            </StackPanel>
+
+            <StackPanel Grid.Column="1">
+                <TextBlock Text="TUESDAY"
+                           FontSize="14"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Center"
+                           x:Name="Day2_DayRota"/>
+                <TextBlock Text="01/01/2022"
+                           FontSize="10"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Center"
+                           x:Name="Day2_DateRota"/>
+                <WrapPanel x:Name="Day2Rota"/>
+            </StackPanel>
+
+            <StackPanel Grid.Column="2">
+                <TextBlock Text="WEDNESDAY"
+                           FontSize="14"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Center"
+                           x:Name="Day3_DayRota"/>
+                <TextBlock Text="01/01/2022"
+                           FontSize="10"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Center"
+                           x:Name="Day3_DateRota"/>
+                <WrapPanel x:Name="Day3Rota"/>
+            </StackPanel>
+
+            <StackPanel Grid.Column="3">
+                <TextBlock Text="THURSDAY"
+                           FontSize="14"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Center"
+                           x:Name="Day4_DayRota"/>
+                <TextBlock Text="01/01/2022"
+                           FontSize="10"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Center"
+                           x:Name="Day4_DateRota"/>
+                <WrapPanel x:Name="Day4Rota"/>
+            </StackPanel>
+
+            <StackPanel Grid.Column="4">
+                <TextBlock Text="FRIDAY"
+                           FontSize="14"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Center"
+                           x:Name="Day5_DayRota"/>
+                <TextBlock Text="01/01/2022"
+                           FontSize="10"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Center"
+                           x:Name="Day5_DateRota"/>
+                <WrapPanel x:Name="Day5Rota"/>
+            </StackPanel>
+
+            <StackPanel Grid.Column="5">
+                <TextBlock Text="SATURDAY"
+                           FontSize="14"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Center"
+                           x:Name="Day6_DayRota"/>
+                <TextBlock Text="01/01/2022"
+                           FontSize="10"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Center"
+                           x:Name="Day6_DateRota"/>
+                <WrapPanel x:Name="Day6Rota"/>
+            </StackPanel>
+
+            <StackPanel Grid.Column="6">
+                <TextBlock Text="SUNDAY"
+                           FontSize="14"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Center"
+                           x:Name="Day7_DayRota"/>
+                <TextBlock Text="01/01/2022"
+                           FontSize="10"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Center"
+                           x:Name="Day7_DateRota"/>
+                <WrapPanel x:Name="Day7Rota"/>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</UserControl>
