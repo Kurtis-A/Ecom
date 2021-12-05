@@ -15,6 +15,9 @@ using Ecom.View.Staff;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System.IO;
+using Ecom.ViewModel.Absence;
+using Ecom.View.Absence;
+using Ecom.View.Planner;
 
 namespace Ecom
 {
@@ -79,6 +82,10 @@ namespace Ecom
                 .ForMember(x => x.StaffMembers, options => options.Ignore())
                 .ForMember(x => x.DisplayAddress, options => options.Ignore())
                 .ForMember(x => x.DisplayAvailability, options => options.Ignore());
+
+                cfg.CreateMap<Absence, AbsenceViewModel>();
+
+                cfg.CreateMap<AbsenceViewModel, Absence>();
             });
 
             Globals.Mapper = config.CreateMapper();
@@ -90,22 +97,28 @@ namespace Ecom
 
             //Views
             services.AddSingleton(typeof(BaseWindow));
+            services.AddSingleton(typeof(RotaPlannerView));
             services.AddSingleton(typeof(StaffView));
+            services.AddSingleton(typeof(AbsenceView));
 
             //View Model
             services.AddScoped<StaffViewModel>();
+            services.AddScoped<AbsenceViewModel>();
 
             //Service
             services.AddScoped<StaffService>();
+            services.AddScoped<AbsenceService>();
 
             //Repository
             services.AddScoped<StaffRepository>();
-
+            services.AddScoped<AbsenceRepository>();
             //Db Context
-            services.AddDbContext<ApplicationDbContext>(option =>
+            services.AddDbContext<ApplicationDbContext>
+            (option =>
             {
-                option.UseSqlServer(Configuration.GetConnectionString("Local"));
-            },ServiceLifetime.Transient);
+                option.UseSqlServer(Configuration.GetConnectionString("Local"));   
+            },
+            ServiceLifetime.Transient);
             
 
             return services;
