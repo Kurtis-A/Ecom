@@ -1,6 +1,8 @@
 ﻿using Ecom.Data.Model;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using System;
+using System.IO;
 
 namespace Ecom.Data
 {
@@ -21,6 +23,17 @@ namespace Ecom.Data
         public DbSet<Absence> Absence { get; set; }
 
         public DbSet<Rota> Rota { get; set; }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder options)
+        {
+            if (!options.IsConfigured)
+            {
+                var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json", false, true);
+                var config = builder.Build();
+
+                options.UseSqlServer(config.GetConnectionString("Local"));
+            }
+        }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
