@@ -36,12 +36,16 @@ namespace Ecom
 
         private void Minimise_Click(object sender, RoutedEventArgs e) => Globals.Notifier.ShowInformation("Whoops! Not Implemented yet... Sorry :)");
 
-        private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
+        private async void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {            
             var control = sender as TabControl;
             var header = control.SelectedItem as TabItem;
 
             var selected = header.Name;
+
+            PlannerView.Content = null;
+            StaffView.Content = null;
+            AbsenceView.Content = null;
 
             switch (selected)
             {
@@ -49,18 +53,21 @@ namespace Ecom
                     break;
 
                 case "Planner":
-                    PlannerView.Content = Globals.ServiceProvider.GetRequiredService<RotaPlannerView>();
+                    var planner = Globals.ServiceProvider.GetService<RotaPlannerView>();
+                    PlannerView.Content = planner;
+                    await planner.Load();
+
                     break;
 
                 case "Shift":
                     break;
 
                 case "Staff":
-                    StaffView.Content = Globals.ServiceProvider.GetRequiredService<StaffView>();
+                    StaffView.Content = Globals.ServiceProvider.GetService<StaffView>();
                     break;
 
                 case "Absence":
-                    AbsenceView.Content = Globals.ServiceProvider.GetRequiredService<AbsenceView>();
+                    AbsenceView.Content = Globals.ServiceProvider.GetService<AbsenceView>();
                     break;
             }
         }
