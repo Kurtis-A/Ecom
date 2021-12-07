@@ -13,10 +13,6 @@
                 <Setter Property="Margin" Value="2"/>
             </Style>
 
-            <Style TargetType="{x:Type StackPanel}">
-                <Setter Property="Margin" Value="10 3"/>
-            </Style>
-
             <Style TargetType="{x:Type WrapPanel}">
                 <Setter Property="Margin" Value="2"/>
                 <Setter Property="ItemWidth" Value="92"/>
@@ -29,36 +25,63 @@
             <Style TargetType="{x:Type TextBox}">
                 <Setter Property="Foreground" Value="{DynamicResource MaterialDesignBodyLight}"/>
             </Style>
+
+            <Style TargetType="{x:Type TextBlock}">
+                <Setter Property="Foreground" Value="{DynamicResource MaterialDesignBodyLight}"/>
+                <Setter Property="Margin" Value="5 2"/>
+            </Style>
         </Grid.Resources>
         <Grid.RowDefinitions>
-            <RowDefinition Height="auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <Label Grid.Row="0"
-               Content="Team Availability"
-               VerticalAlignment="Center"
-               HorizontalAlignment="Left"
-               Margin="10 0"
-               FontSize="14"/>
+        <materialDesign:Card Background="{DynamicResource PrimaryHueDarkBrush}"
+                             Grid.Row="0"
+                             VerticalAlignment="Center"
+                             HorizontalAlignment="Left"
+                             Margin="10 5"
+                             Width="200">
+            <Label Content="Team Availability"
+                   VerticalAlignment="Center"
+                   HorizontalAlignment="Left"
+                   Margin="10 5"
+                   FontSize="14"/>
+        </materialDesign:Card>
+
 
         <StackPanel Grid.Row="1"
                     Orientation="Horizontal">
+
+            <ComboBox Style="{StaticResource MaterialDesignFilledComboBox}"
+                      Margin="10 5"
+                      HorizontalAlignment="Left"
+                      Width="180"
+                      materialDesign:HintAssist.Hint="Select Rota.."
+                      x:Name="RotaType"
+                      materialDesign:TextFieldAssist.TextFieldCornerRadius="5"
+                      materialDesign:TextFieldAssist.UnderlineCornerRadius="5"
+                      SelectionChanged="RotaType_SelectionChanged"/>
+
 
             <DatePicker Margin="10 5"
                         Style="{StaticResource MaterialDesignFilledDatePicker}"
                         HorizontalAlignment="Left"
                         Width="210"
                         materialDesign:HintAssist.Hint="Select Rota Start Date"
-                        x:Name="SelectedDate"/>
+                        x:Name="SelectedDate"
+                        materialDesign:TextFieldAssist.TextFieldCornerRadius="5"
+                        materialDesign:TextFieldAssist.UnderlineCornerRadius="5"
+                        SelectedDateChanged="SelectedDate_SelectedDateChanged"/>
 
             <Button Height="44"
                     Width="44"
                     Padding="0"
-                    Style="{StaticResource MaterialDesignFlatButton}">
+                    Style="{StaticResource MaterialDesignFlatButton}"
+                    Click="PreviousWeek_OnClick">
                 <materialDesign:PackIcon Kind="ArrowLeft"
                                          Width="30"
                                          Height="30"/>
@@ -67,7 +90,8 @@
             <Button Height="44"
                     Width="44"
                     Padding="0"
-                    Style="{StaticResource MaterialDesignFlatButton}">
+                    Style="{StaticResource MaterialDesignFlatButton}"
+                    Click="NextWeek_OnClick">
                 <materialDesign:PackIcon Kind="ArrowRight"
                                          Width="30"
                                          Height="30"/>
@@ -305,14 +329,22 @@
             </materialDesign:Card>
         </Grid>
 
-        <Label Grid.Row="3"
-               Content="Team Rota"
-               VerticalAlignment="Center"
-               HorizontalAlignment="Left"
-               Margin="10 0"
-               FontSize="14"/>
+        <materialDesign:Card Grid.Row="3"
+                             Background="{DynamicResource PrimaryHueDarkBrush}"
+                             VerticalAlignment="Center"
+                             HorizontalAlignment="Left"
+                             Margin="10 5"
+                             Width="200">
+            <Label Content="Team Rota"
+                   VerticalAlignment="Center"
+                   HorizontalAlignment="Left"
+                   Margin="10 5"
+                   FontSize="14"/>
+        </materialDesign:Card>
 
-        <Grid Grid.Row="4">
+
+        <Grid Grid.Row="4"
+              x:Name="GridRota">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
                 <ColumnDefinition />
