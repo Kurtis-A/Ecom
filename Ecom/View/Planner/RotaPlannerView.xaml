@@ -10,15 +10,20 @@
     <Grid>
         <Grid.Resources>
             <Style TargetType="{x:Type materialDesign:Card}">
-                <Setter Property="Margin" Value="5"/>
+                <Setter Property="Margin" Value="2"/>
             </Style>
 
             <Style TargetType="{x:Type StackPanel}">
-                <Setter Property="Margin" Value="5"/>
+                <Setter Property="Margin" Value="10 3"/>
             </Style>
 
             <Style TargetType="{x:Type WrapPanel}">
-                <Setter Property="Margin" Value="5"/>
+                <Setter Property="Margin" Value="2"/>
+                <Setter Property="ItemWidth" Value="92"/>
+            </Style>
+            
+            <Style TargetType="{x:Type Border}">
+                <Setter Property="Margin" Value="0"/>
             </Style>
 
             <Style TargetType="{x:Type TextBox}">
@@ -26,10 +31,10 @@
             </Style>
         </Grid.Resources>
         <Grid.RowDefinitions>
-            <RowDefinition Height="60"/>
+            <RowDefinition Height="auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="60"/>
+            <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
@@ -38,7 +43,7 @@
                VerticalAlignment="Center"
                HorizontalAlignment="Left"
                Margin="10 0"
-               FontSize="26"/>
+               FontSize="14"/>
 
         <StackPanel Grid.Row="1"
                     Orientation="Horizontal">
@@ -89,29 +94,27 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition />
                     </Grid.RowDefinitions>
+                    <StackPanel>
 
-                    <Border Grid.Row="0"
-                            Background="{DynamicResource PrimaryHueMidBrush}">
-                        <StackPanel>
-
-                            <TextBlock Text="MONDAY"
-                                       FontSize="18"
+                        <TextBlock Text="MONDAY"
+                                       FontSize="16"
                                        VerticalAlignment="Center"
                                        HorizontalAlignment="Center"
                                        x:Name="Day1_Day"/>
 
-                            <TextBlock Text="01/01/2022"
-                                       FontSize="14"
+                        <TextBlock Text="01/01/2022"
+                                       FontSize="12"
                                        VerticalAlignment="Center"
                                        HorizontalAlignment="Center"
                                        x:Name="Day1_Date"/>
 
-                        </StackPanel>
-                    </Border>
+                    </StackPanel>
 
-
-                    <WrapPanel x:Name="Day1Avail"
-                               Grid.Row="1"/>
+                    <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                                  VerticalScrollBarVisibility="Auto"
+                                  Grid.Row="1">
+                        <WrapPanel x:Name="Day1Avail"/>
+                    </ScrollViewer>
                 </Grid>
             </materialDesign:Card>
 
@@ -123,26 +126,27 @@
                         <RowDefinition />
                     </Grid.RowDefinitions>
 
-                    <Border Grid.Row="0"
-                            Background="{DynamicResource PrimaryHueMidBrush}">
-                        <StackPanel>
-                            
-                            <TextBlock Text="TUESDAY"
-                                       FontSize="18"
+                    <StackPanel>
+
+                        <TextBlock Text="TUESDAY"
+                                       FontSize="16"
                                        VerticalAlignment="Center"
                                        HorizontalAlignment="Center"
                                        x:Name="Day2_Day"/>
-                            
-                            <TextBlock Text="01/01/2022"
-                                       FontSize="14"
+
+                        <TextBlock Text="01/01/2022"
+                                       FontSize="12"
                                        VerticalAlignment="Center"
                                        HorizontalAlignment="Center"
                                        x:Name="Day2_Date"/>
-                        </StackPanel>
-                    </Border>
+                    </StackPanel>
 
-                    <WrapPanel x:Name="Day2Avail"
-                               Grid.Column="1"/>
+                    <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                                  VerticalScrollBarVisibility="Auto"
+                                  Grid.Row="1">
+                        <WrapPanel x:Name="Day2Avail"/>
+                    </ScrollViewer>
+                    
                 </Grid>
             </materialDesign:Card>
 
@@ -154,27 +158,26 @@
                         <RowDefinition />
                     </Grid.RowDefinitions>
 
-                    <Border Grid.Row="0"
-                            Background="{DynamicResource PrimaryHueMidBrush}">
-                        <StackPanel>
-                            
-                            <TextBlock Text="WEDNESDAY"
-                                       FontSize="18"
+                    <StackPanel>
+
+                        <TextBlock Text="WEDNESDAY"
+                                       FontSize="16"
                                        VerticalAlignment="Center"
                                        HorizontalAlignment="Center"
                                        x:Name="Day3_Day"/>
-                            
-                           <TextBlock Text="01/01/2022"
-                                       FontSize="14"
+
+                        <TextBlock Text="01/01/2022"
+                                       FontSize="12"
                                        VerticalAlignment="Center"
                                        HorizontalAlignment="Center"
                                        x:Name="Day3_Date"/>
 
-                        </StackPanel>
-                    </Border>
-
-                    <WrapPanel x:Name="Day3Avail"
-                               Grid.Row="1"/>
+                    </StackPanel>
+                    <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                                  VerticalScrollBarVisibility="Auto"
+                                  Grid.Row="1">
+                        <WrapPanel x:Name="Day3Avail"/>
+                    </ScrollViewer>
                 </Grid>
             </materialDesign:Card>
 
@@ -186,27 +189,26 @@
                         <RowDefinition />
                     </Grid.RowDefinitions>
 
-                    <Border Grid.Row="0"
-                            Background="{DynamicResource PrimaryHueMidBrush}">
-                        <StackPanel>
-                            
-                            <TextBlock Text="THURSDAY"
-                                       FontSize="18"
+                    <StackPanel>
+
+                        <TextBlock Text="THURSDAY"
+                                       FontSize="16"
                                        VerticalAlignment="Center"
                                        HorizontalAlignment="Center"
                                        x:Name="Day4_Day"/>
-                            
-                            <TextBlock Text="01/01/2022"
-                                       FontSize="14"
+
+                        <TextBlock Text="01/01/2022"
+                                       FontSize="12"
                                        VerticalAlignment="Center"
                                        HorizontalAlignment="Center"
                                        x:Name="Day4_Date"/>
 
-                        </StackPanel>
-                    </Border>
-
-                    <WrapPanel x:Name="Day4Avail"
-                               Grid.Row="1"/>
+                    </StackPanel>
+                    <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                                  VerticalScrollBarVisibility="Auto"
+                                  Grid.Row="1">
+                        <WrapPanel x:Name="Day4Avail"/>
+                    </ScrollViewer>
                 </Grid>
             </materialDesign:Card>
 
@@ -218,27 +220,26 @@
                         <RowDefinition />
                     </Grid.RowDefinitions>
 
-                    <Border Grid.Row="0"
-                            Background="{DynamicResource PrimaryHueMidBrush}">
-                        <StackPanel>
-                            
-                            <TextBlock Text="FRIDAY"
-                                       FontSize="18"
+                    <StackPanel>
+
+                        <TextBlock Text="FRIDAY"
+                                       FontSize="16"
                                        VerticalAlignment="Center"
                                        HorizontalAlignment="Center"
                                        x:Name="Day5_Day"/>
-                            
-                            <TextBlock Text="01/01/2022"
-                                       FontSize="14"
+
+                        <TextBlock Text="01/01/2022"
+                                       FontSize="12"
                                        VerticalAlignment="Center"
                                        HorizontalAlignment="Center"
                                        x:Name="Day5_Date"/>
 
-                        </StackPanel>
-                    </Border>
-
-                    <WrapPanel x:Name="Day5Avail"
-                               Grid.Row="1"/>
+                    </StackPanel>
+                    <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                                  VerticalScrollBarVisibility="Auto"
+                                  Grid.Row="1">
+                        <WrapPanel x:Name="Day5Avail"/>
+                    </ScrollViewer>
                 </Grid>
             </materialDesign:Card>
 
@@ -250,27 +251,26 @@
                         <RowDefinition />
                     </Grid.RowDefinitions>
 
-                    <Border Grid.Row="0"
-                            Background="{DynamicResource PrimaryHueMidBrush}">
-                        <StackPanel>
-                            
-                            <TextBlock Text="SATURDAY"
-                                       FontSize="18"
+                    <StackPanel>
+
+                        <TextBlock Text="SATURDAY"
+                                       FontSize="16"
                                        VerticalAlignment="Center"
                                        HorizontalAlignment="Center"
                                        x:Name="Day6_Day"/>
-                            
-                            <TextBlock Text="01/01/2022"
-                                       FontSize="14"
+
+                        <TextBlock Text="01/01/2022"
+                                       FontSize="12"
                                        VerticalAlignment="Center"
                                        HorizontalAlignment="Center"
                                        x:Name="Day6_Date"/>
-                            
-                        </StackPanel>
-                    </Border>
 
-                    <WrapPanel x:Name="Day6Avail"
-                               Grid.Row="1"/>
+                    </StackPanel>
+                    <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                                  VerticalScrollBarVisibility="Auto"
+                                  Grid.Row="1">
+                        <WrapPanel x:Name="Day6Avail"/>
+                    </ScrollViewer>
                 </Grid>
             </materialDesign:Card>
 
@@ -281,28 +281,26 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition />
                     </Grid.RowDefinitions>
+                    <StackPanel>
 
-                    <Border Grid.Row="0"
-                            Background="{DynamicResource PrimaryHueMidBrush}">
-                        <StackPanel>
-
-                            <TextBlock Text="SUNDAY"
-                                       FontSize="18"
+                        <TextBlock Text="SUNDAY"
+                                       FontSize="16"
                                        VerticalAlignment="Center"
                                        HorizontalAlignment="Center"
                                        x:Name="Day7_Day"/>
 
-                            <TextBlock Text="01/01/2022"
-                                       FontSize="14"
+                        <TextBlock Text="01/01/2022"
+                                       FontSize="12"
                                        VerticalAlignment="Center"
                                        HorizontalAlignment="Center"
                                        x:Name="Day7_Date"/>
 
-                        </StackPanel>
-                    </Border>
-
-                    <WrapPanel x:Name="Day7Avail"
-                               Grid.Row="1"/>
+                    </StackPanel>
+                    <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                                  VerticalScrollBarVisibility="Auto"
+                                  Grid.Row="1">
+                        <WrapPanel x:Name="Day7Avail"/>
+                    </ScrollViewer>
                 </Grid>
             </materialDesign:Card>
         </Grid>
@@ -312,7 +310,7 @@
                VerticalAlignment="Center"
                HorizontalAlignment="Left"
                Margin="10 0"
-               FontSize="26"/>
+               FontSize="14"/>
 
         <Grid Grid.Row="4">
             <Grid.ColumnDefinitions>

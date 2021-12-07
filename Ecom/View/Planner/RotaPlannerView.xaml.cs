@@ -1,6 +1,7 @@
 ﻿using Ecom.Helpers;
 using Ecom.Services;
 using Ecom.ViewModel.Absence;
+using Ecom.ViewModel.Planner;
 using Ecom.ViewModel.Staff;
 using MaterialDesignThemes.Wpf;
 using System;
@@ -31,6 +32,7 @@ namespace Ecom.View.Planner
         private readonly AbsenceService _absenceService;
 
         public event PropertyChangedEventHandler PropertyChanged;
+        public PlannerViewModel ViewModel;
 
         public RotaPlannerView(StaffService staffService, AbsenceService absenceService)
         {
@@ -38,34 +40,26 @@ namespace Ecom.View.Planner
 
             _staffService = staffService;
             _absenceService = absenceService;
+        }
 
-            StaffAvailability = new List<StaffViewModel>();
-            StaffAbsences = new List<AbsenceViewModel>();
+        public async Task Load()
+        {
+            ViewModel = new PlannerViewModel();
 
-            Load();
+            ViewModel.StaffAvailability = new List<StaffViewModel>();
+            ViewModel.StaffAbsences = new List<AbsenceViewModel>();
+
+            ViewModel.StaffAvailability = new List<StaffViewModel>(await _staffService.FetchAllStaffAvailability());
+            ViewModel.StaffAbsences = new List<AbsenceViewModel>(await _absenceService.FetchAllAbsences());
+
+            DataContext = ViewModel;
 
             var startDate = DateTime.Today.AddMonths(1);
             SelectedDate.SelectedDate = startDate;
+
             BuildRotaDates(startDate);
+
             Populate();
-
-            DataContext = this;
-        }
-
-        public List<StaffViewModel> StaffAvailability { get; set; }
-
-        public List<AbsenceViewModel> StaffAbsences { get; set; }
-
-        private async void Load()
-        {
-            var availability = await _staffService.FetchAllStaffAvailability();
-            var absences = await _absenceService.FetchAllAbsences();
-
-            StaffAvailability = availability;
-            StaffAbsences = absences;
-
-            //OnPropertyChanged(nameof(StaffAvailability));
-            //OnPropertyChanged(nameof(StaffAbsences));
         }
 
         public void BuildRotaDates(DateTime selectDate)
@@ -123,6 +117,8 @@ namespace Ecom.View.Planner
 
             Day7_DayRota.Text = rotaDates[6].Key;
             Day7_DateRota.Text = rotaDates[6].Value.ToString("dd MMM yy");
+
+            //Task.Run(() => Populate());
         }
 
         private void Populate()
@@ -135,87 +131,99 @@ namespace Ecom.View.Planner
             Day6Avail.Children.Clear();
             Day7Avail.Children.Clear();
 
-            foreach (var staffAvailability in StaffAvailability.Where(x => x.Preference.Contains(Day1_Day.Text)))
+            var staffAbsences = ViewModel.StaffAbsences;
+
+            foreach (var staffAvailability in ViewModel.StaffAvailability.Where(x => x.Preference.Contains(Day1_Day.Text) && x.Role == "Team Member"))
             {
-                Day1Avail.Children.Add(StaffAbsences.Any(x =>
+                Day1Avail.Children.Add(staffAbsences.Any(x =>
                     x.Date == Convert.ToDateTime(Day1_Date.Text) && x.Username == staffAvailability.Username)
-                    ? CreateStaffChip(staffAvailability.Username, "Holiday")
-                    : CreateStaffChip(staffAvailability.Username, "Available"));
+                    ? CreateStaffChip(staffAvailability.Username, staffAbsences.FirstOrDefault(x => x.Username == staffAvailability.Username))
+                    : CreateStaffChip(staffAvailability.Username, null));
             }
 
-            foreach (var staffAvailability in StaffAvailability.Where(x => x.Preference.Contains(Day2_Day.Text)))
+            foreach (var staffAvailability in ViewModel.StaffAvailability.Where(x => x.Preference.Contains(Day2_Day.Text) && x.Role == "Team Member"))
             {
-                Day2Avail.Children.Add(StaffAbsences.Any(x =>
+                Day2Avail.Children.Add(ViewModel.StaffAbsences.Any(x =>
                     x.Date == Convert.ToDateTime(Day2_Date.Text) && x.Username == staffAvailability.Username)
-                    ? CreateStaffChip(staffAvailability.Username, "Holiday")
-                    : CreateStaffChip(staffAvailability.Username, "Available"));
+                    ? CreateStaffChip(staffAvailability.Username, staffAbsences.FirstOrDefault(x => x.Username == staffAvailability.Username))
+                    : CreateStaffChip(staffAvailability.Username, null));
             }
 
-            foreach (var staffAvailability in StaffAvailability.Where(x => x.Preference.Contains(Day3_Day.Text)))
+            foreach (var staffAvailability in ViewModel.StaffAvailability.Where(x => x.Preference.Contains(Day3_Day.Text) && x.Role == "Team Member"))
             {
-                Day3Avail.Children.Add(StaffAbsences.Any(x =>
+                Day3Avail.Children.Add(ViewModel.StaffAbsences.Any(x =>
                     x.Date == Convert.ToDateTime(Day3_Date.Text) && x.Username == staffAvailability.Username)
-                    ? CreateStaffChip(staffAvailability.Username, "Holiday")
-                    : CreateStaffChip(staffAvailability.Username, "Available"));
+                    ? CreateStaffChip(staffAvailability.Username, staffAbsences.FirstOrDefault(x => x.Username == staffAvailability.Username))
+                    : CreateStaffChip(staffAvailability.Username, null));
             }
 
-            foreach (var staffAvailability in StaffAvailability.Where(x => x.Preference.Contains(Day4_Day.Text)))
+            foreach (var staffAvailability in ViewModel.StaffAvailability.Where(x => x.Preference.Contains(Day4_Day.Text) && x.Role == "Team Member"))
             {
-                Day4Avail.Children.Add(StaffAbsences.Any(x =>
+                Day4Avail.Children.Add(ViewModel.StaffAbsences.Any(x =>
                     x.Date == Convert.ToDateTime(Day4_Date.Text) && x.Username == staffAvailability.Username)
-                    ? CreateStaffChip(staffAvailability.Username, "Holiday")
-                    : CreateStaffChip(staffAvailability.Username, "Available"));
+                    ? CreateStaffChip(staffAvailability.Username, staffAbsences.FirstOrDefault(x => x.Username == staffAvailability.Username))
+                    : CreateStaffChip(staffAvailability.Username, null));
             }
 
-            foreach (var staffAvailability in StaffAvailability.Where(x => x.Preference.Contains(Day5_Day.Text)))
+            foreach (var staffAvailability in ViewModel.StaffAvailability.Where(x => x.Preference.Contains(Day5_Day.Text) && x.Role == "Team Member"))
             {
-                Day5Avail.Children.Add(StaffAbsences.Any(x =>
+                Day5Avail.Children.Add(ViewModel.StaffAbsences.Any(x =>
                     x.Date == Convert.ToDateTime(Day5_Date.Text) && x.Username == staffAvailability.Username)
-                    ? CreateStaffChip(staffAvailability.Username, "Holiday")
-                    : CreateStaffChip(staffAvailability.Username, "Available"));
+                    ? CreateStaffChip(staffAvailability.Username, staffAbsences.FirstOrDefault(x => x.Username == staffAvailability.Username))
+                    : CreateStaffChip(staffAvailability.Username, null));
             }
 
-            foreach (var staffAvailability in StaffAvailability.Where(x => x.Preference.Contains(Day6_Day.Text)))
+            foreach (var staffAvailability in ViewModel.StaffAvailability.Where(x => x.Preference.Contains(Day6_Day.Text) && x.Role == "Team Member"))
             {
-                Day6Avail.Children.Add(StaffAbsences.Any(x =>
+                Day6Avail.Children.Add(ViewModel.StaffAbsences.Any(x =>
                     x.Date == Convert.ToDateTime(Day6_Date.Text) && x.Username == staffAvailability.Username)
-                    ? CreateStaffChip(staffAvailability.Username, "Holiday")
-                    : CreateStaffChip(staffAvailability.Username, "Available"));
+                    ? CreateStaffChip(staffAvailability.Username, staffAbsences.FirstOrDefault(x => x.Username == staffAvailability.Username))
+                    : CreateStaffChip(staffAvailability.Username, null));
             }
 
-            foreach (var staffAvailability in StaffAvailability.Where(x => x.Preference.Contains(Day7_Day.Text)))
+            foreach (var staffAvailability in ViewModel.StaffAvailability.Where(x => x.Preference.Contains(Day7_Day.Text) && x.Role == "Team Member"))
             {
-                Day7Avail.Children.Add(StaffAbsences.Any(x =>
+                Day7Avail.Children.Add(ViewModel.StaffAbsences.Any(x =>
                     x.Date == Convert.ToDateTime(Day7_Date.Text) && x.Username == staffAvailability.Username)
-                    ? CreateStaffChip(staffAvailability.Username, "Holiday")
-                    : CreateStaffChip(staffAvailability.Username, "Available"));
+                    ? CreateStaffChip(staffAvailability.Username, staffAbsences.FirstOrDefault(x => x.Username == staffAvailability.Username))
+                    : CreateStaffChip(staffAvailability.Username, null));
             }
         }
 
-        public UIElement CreateStaffChip(string username, string status)
+        public UIElement CreateStaffChip(string username, AbsenceViewModel? absenceViewModel)
         {
-            var background = status == "Available" ? Brushes.PaleGreen : Brushes.PaleVioletRed;
+            var type = "Available";
+            if (absenceViewModel != null)
+                type = absenceViewModel.Type;
+            
+
+            var background = type == "Available" ? Brushes.Green : Brushes.Red;
             PackIcon icon = null;
-            switch (status)
+            var toolTip = string.Empty;
+            switch (type)
             {
                 case "Available":
                     icon = new PackIcon() { Kind = PackIconKind.Tick };
+                    toolTip = "Available";
                     break;
 
-                case "Holiday":
+                case "Annual Leave":
                     icon = new PackIcon() { Kind = PackIconKind.AeroplaneTakeoff };
+                    toolTip = "on Annual Leave";
                     break;
 
-                case "Illness":
+                case "Medical":
                     icon = new PackIcon() { Kind = PackIconKind.MedicalBag };
+                    toolTip = "off for Medical Reasons";
                     break;
             }
 
             return new Chip()
             {
                 Content = username,
-                Background = background,
-                Icon = icon
+                Icon = icon,
+                IconBackground = background,
+                ToolTip = $"{username} {toolTip}"
             };
         }
 
