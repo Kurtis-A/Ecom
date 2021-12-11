@@ -6,7 +6,8 @@
              xmlns:local="clr-namespace:Ecom.View.Planner"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
-             d:DesignHeight="660" d:DesignWidth="1400">
+             d:DesignHeight="660" d:DesignWidth="1400"
+             Loaded="RotaPlannerView_OnLoaded">
     <Grid>
         <Grid.Resources>
             <Style TargetType="{x:Type materialDesign:Card}">
@@ -99,234 +100,51 @@
         </StackPanel>
 
 
-        <Grid Grid.Row="2"
-              Margin="5">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition />
-                <ColumnDefinition />
-                <ColumnDefinition />
-                <ColumnDefinition />
-                <ColumnDefinition />
-                <ColumnDefinition />
-                <ColumnDefinition />
-            </Grid.ColumnDefinitions>
+        <Grid Grid.Row="2" Margin="5">
+            <ItemsControl ItemsSource ="{Binding Days}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <UniformGrid Rows="1" Columns="7">
+                        </UniformGrid>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <materialDesign:Card>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition />
+                                </Grid.RowDefinitions>
+                                <StackPanel>
+                                    <TextBlock Text="{Binding Path=Date, StringFormat=dddd}" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                    <TextBlock Text="{Binding Path=Date, StringFormat=dd/MM/yyyy}" FontSize="12" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                </StackPanel>
 
-            <!--Day 1 Availability-->
-            <materialDesign:Card Grid.Column="0">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition />
-                    </Grid.RowDefinitions>
-                    <StackPanel>
-
-                        <TextBlock Text="MONDAY"
-                                       FontSize="16"
-                                       VerticalAlignment="Center"
-                                       HorizontalAlignment="Center"
-                                       x:Name="Day1_Day"/>
-
-                        <TextBlock Text="01/01/2022"
-                                       FontSize="12"
-                                       VerticalAlignment="Center"
-                                       HorizontalAlignment="Center"
-                                       x:Name="Day1_Date"/>
-
-                    </StackPanel>
-
-                    <ScrollViewer HorizontalScrollBarVisibility="Disabled"
-                                  VerticalScrollBarVisibility="Auto"
-                                  Grid.Row="1">
-                        <WrapPanel x:Name="Day1Avail"/>
-                    </ScrollViewer>
-                </Grid>
-            </materialDesign:Card>
-
-            <!--Day 2 Availability-->
-            <materialDesign:Card Grid.Column="1">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition />
-                    </Grid.RowDefinitions>
-
-                    <StackPanel>
-
-                        <TextBlock Text="TUESDAY"
-                                       FontSize="16"
-                                       VerticalAlignment="Center"
-                                       HorizontalAlignment="Center"
-                                       x:Name="Day2_Day"/>
-
-                        <TextBlock Text="01/01/2022"
-                                       FontSize="12"
-                                       VerticalAlignment="Center"
-                                       HorizontalAlignment="Center"
-                                       x:Name="Day2_Date"/>
-                    </StackPanel>
-
-                    <ScrollViewer HorizontalScrollBarVisibility="Disabled"
-                                  VerticalScrollBarVisibility="Auto"
-                                  Grid.Row="1">
-                        <WrapPanel x:Name="Day2Avail"/>
-                    </ScrollViewer>
-                    
-                </Grid>
-            </materialDesign:Card>
-
-            <!--Day 3 Availability-->
-            <materialDesign:Card Grid.Column="2">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition />
-                    </Grid.RowDefinitions>
-
-                    <StackPanel>
-
-                        <TextBlock Text="WEDNESDAY"
-                                       FontSize="16"
-                                       VerticalAlignment="Center"
-                                       HorizontalAlignment="Center"
-                                       x:Name="Day3_Day"/>
-
-                        <TextBlock Text="01/01/2022"
-                                       FontSize="12"
-                                       VerticalAlignment="Center"
-                                       HorizontalAlignment="Center"
-                                       x:Name="Day3_Date"/>
-
-                    </StackPanel>
-                    <ScrollViewer HorizontalScrollBarVisibility="Disabled"
-                                  VerticalScrollBarVisibility="Auto"
-                                  Grid.Row="1">
-                        <WrapPanel x:Name="Day3Avail"/>
-                    </ScrollViewer>
-                </Grid>
-            </materialDesign:Card>
-
-            <!--Day 4 Availability-->
-            <materialDesign:Card Grid.Column="3">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition />
-                    </Grid.RowDefinitions>
-
-                    <StackPanel>
-
-                        <TextBlock Text="THURSDAY"
-                                       FontSize="16"
-                                       VerticalAlignment="Center"
-                                       HorizontalAlignment="Center"
-                                       x:Name="Day4_Day"/>
-
-                        <TextBlock Text="01/01/2022"
-                                       FontSize="12"
-                                       VerticalAlignment="Center"
-                                       HorizontalAlignment="Center"
-                                       x:Name="Day4_Date"/>
-
-                    </StackPanel>
-                    <ScrollViewer HorizontalScrollBarVisibility="Disabled"
-                                  VerticalScrollBarVisibility="Auto"
-                                  Grid.Row="1">
-                        <WrapPanel x:Name="Day4Avail"/>
-                    </ScrollViewer>
-                </Grid>
-            </materialDesign:Card>
-
-            <!--Day 5 Availability-->
-            <materialDesign:Card Grid.Column="4">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition />
-                    </Grid.RowDefinitions>
-
-                    <StackPanel>
-
-                        <TextBlock Text="FRIDAY"
-                                       FontSize="16"
-                                       VerticalAlignment="Center"
-                                       HorizontalAlignment="Center"
-                                       x:Name="Day5_Day"/>
-
-                        <TextBlock Text="01/01/2022"
-                                       FontSize="12"
-                                       VerticalAlignment="Center"
-                                       HorizontalAlignment="Center"
-                                       x:Name="Day5_Date"/>
-
-                    </StackPanel>
-                    <ScrollViewer HorizontalScrollBarVisibility="Disabled"
-                                  VerticalScrollBarVisibility="Auto"
-                                  Grid.Row="1">
-                        <WrapPanel x:Name="Day5Avail"/>
-                    </ScrollViewer>
-                </Grid>
-            </materialDesign:Card>
-
-            <!--Day 6 Availability-->
-            <materialDesign:Card Grid.Column="5">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition />
-                    </Grid.RowDefinitions>
-
-                    <StackPanel>
-
-                        <TextBlock Text="SATURDAY"
-                                       FontSize="16"
-                                       VerticalAlignment="Center"
-                                       HorizontalAlignment="Center"
-                                       x:Name="Day6_Day"/>
-
-                        <TextBlock Text="01/01/2022"
-                                       FontSize="12"
-                                       VerticalAlignment="Center"
-                                       HorizontalAlignment="Center"
-                                       x:Name="Day6_Date"/>
-
-                    </StackPanel>
-                    <ScrollViewer HorizontalScrollBarVisibility="Disabled"
-                                  VerticalScrollBarVisibility="Auto"
-                                  Grid.Row="1">
-                        <WrapPanel x:Name="Day6Avail"/>
-                    </ScrollViewer>
-                </Grid>
-            </materialDesign:Card>
-
-            <!--Day 7 Availability-->
-            <materialDesign:Card Grid.Column="6">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition />
-                    </Grid.RowDefinitions>
-                    <StackPanel>
-
-                        <TextBlock Text="SUNDAY"
-                                       FontSize="16"
-                                       VerticalAlignment="Center"
-                                       HorizontalAlignment="Center"
-                                       x:Name="Day7_Day"/>
-
-                        <TextBlock Text="01/01/2022"
-                                       FontSize="12"
-                                       VerticalAlignment="Center"
-                                       HorizontalAlignment="Center"
-                                       x:Name="Day7_Date"/>
-
-                    </StackPanel>
-                    <ScrollViewer HorizontalScrollBarVisibility="Disabled"
-                                  VerticalScrollBarVisibility="Auto"
-                                  Grid.Row="1">
-                        <WrapPanel x:Name="Day7Avail"/>
-                    </ScrollViewer>
-                </Grid>
-            </materialDesign:Card>
+                                <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Grid.Row="1">
+                                    <ItemsControl ItemsSource ="{Binding StaffAvailability}">
+                                        <ItemsControl.ItemsPanel>
+                                            <ItemsPanelTemplate>
+                                                <WrapPanel></WrapPanel>
+                                            </ItemsPanelTemplate>
+                                        </ItemsControl.ItemsPanel>
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <!-- If the list contained both absence and available values we could use a converter to apply the icon and tooltip to interchange the values-->
+                                                <materialDesign:Chip  ToolTip="Available" Content="{Binding Username}" Background="{StaticResource PrimaryHueLightBrush}">
+                                                    <materialDesign:Chip.Icon>
+                                                        <materialDesign:PackIcon Kind="Tick"/>
+                                                    </materialDesign:Chip.Icon>
+                                                </materialDesign:Chip>
+                                            </DataTemplate>
+                                            </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+                                </ScrollViewer>
+                            </Grid>
+                        </materialDesign:Card>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
         </Grid>
 
         <materialDesign:Card Grid.Row="3"

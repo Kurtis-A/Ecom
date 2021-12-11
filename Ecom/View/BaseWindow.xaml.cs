@@ -55,7 +55,7 @@ namespace Ecom
                 case "Planner":
                     var planner = Globals.ServiceProvider.GetService<RotaPlannerView>();
                     PlannerView.Content = planner;
-                    await planner.Load();
+                    //await planner.Load();
 
                     break;
 
